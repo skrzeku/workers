@@ -1,0 +1,170 @@
+<div class="start_header">
+  <h5><i class="fas fa-users"></i>Pracownicy</h5>
+</div>
+<div class="container-fluid big_container">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <div id="filter_wrapper">
+        <div class="one_filter">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nazwa">
+          </mat-form-field>
+        </div>
+        <div class="one_filter">
+          <mat-form-field>
+            <mat-select multiple>
+              <mat-option *ngFor="let depart of departments" [value]="depart">{{depart}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="one_filter">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Wynagrodzenie">
+          </mat-form-field>
+        </div>
+        <button mat-raised-button>Filtruj</button>
+      </div>
+      <div class="center-text">
+        <button mat-raised-button (click)="filters_shown = !filters_shown">Zaawansowane filtrowanie</button>
+      </div>
+      <div class="advanced_filters" *ngIf="filters_shown">
+        <div class="one_filter">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nazwa">
+          </mat-form-field>
+        </div>
+        <div class="one_filter">
+          <mat-form-field>
+            <mat-select multiple>
+              <mat-option *ngFor="let depart of departments" [value]="depart">{{depart}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="employees_wrapper">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="last_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko </th>
+            <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Dział </th>
+            <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="education">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Wykształcenie </th>
+            <td mat-cell *matCellDef="let element"> {{element.education}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="salaries">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Wynagrodzenie </th>
+            <td mat-cell *matCellDef="let element"> {{element.salaries}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mytr" (click)="detailsEmployee(row)"></tr>
+        </table>
+        <div class="mt-3">
+          <button mat-raised-button (click)="AddEmployer()">Dodaj Pracownika</button>
+        </div>
+
+      </div>
+    </div>
+      <div class="col-12 col-lg-5 right_employees_inside" [ngClass]="{'right_shown': showright}">
+        <div class="row">
+          <div class="col-4 employee_img" >
+            <img src="../../assets/images/Unknown.jpeg">
+          </div>
+          <div class="col-6">
+            <div>{{employee?.id}}</div>
+            <div>{{employee?.first_name}} {{employee?.last_name}}</div>
+            <div>Pesel: {{employee?.pesel}}</div>
+            <div>Data Urodzenia: {{employee?.birthday}}</div>
+          </div>
+          <i class="fas fa-times" (click)="closeInfo()" matTooltip="Zamknij"></i>
+
+          <div class="col-12">
+            <table id="employee_table">
+              <h6><i class="far fa-user"></i>Dane Pracownika:</h6>
+              <tr>
+                <td class="first_td">Dział:</td>
+                <td>{{employee?.department}}</td>
+              </tr>
+              <tr>
+                <td class="first_td">Stanowisko:</td>
+                <td>{{employee?.position}}</td>
+              </tr>
+              <tr>
+                <td class="first_td">Rodzaj Umowy:</td>
+                <td><a href="#">Umowa o prace</a></td>
+              </tr>
+              <tr>
+                <td class="first_td">Umowa od:</td>
+                <td>{{employee?.start_date}}</td>
+              </tr>
+              <tr>
+                <td class="first_td">Umowa do:</td>
+                <td>{{employee?.contract_period}}</td>
+              </tr>
+              <tr>
+                <td class="first_td">Wynagrodzenie(brutto):</td>
+                <td>{{employee?.salaries}} zł</td>
+              </tr>
+              <tr>
+              <td class="first_td">Wykształcenie:</td>
+              <td>{{employee?.education}}</td>
+            </tr>
+              <tr>
+                <td class="first_td">Staż pracy:</td>
+                <td>Obliczenie</td>
+              </tr>
+              <tr>
+                <td class="first_td">Dostępny urlop:</td>
+                <td>Obliczenie</td>
+              </tr>
+              <tr>
+                <td class="first_td">Wykorzystany urlop:</td>
+                <td>Obliczenie</td>
+              </tr>
+              <tr>
+                <td class="first_td">Nieobecności:</td>
+                <td><a href="">Liczba dni</a></td>
+              </tr>
+              <tr>
+                <td class="first_td">Grafik:</td>
+                <td><a href="">Grafik</a></td>
+              </tr>
+              <tr>
+                <td class="first_td">CV:</td>
+                <td><a href="">CV</a></td>
+              </tr>
+              <h6><i class="fas fa-tools"></i>Akcje:</h6>
+            </table>
+            <div id="action_wrapper">
+              <i class="fas fa-at" matTooltip="Napisz" [matTooltipClass]="'tool-tip'"></i>
+              <i class="fas fa-edit" matTooltip="Edycja Pracownika"></i>
+              <i class="fas fa-user-times" matTooltip="Usunięcie Pracownika"></i>
+              <i class="fas fa-file-signature" matTooltip="Dodaj Umowę"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+

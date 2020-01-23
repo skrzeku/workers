@@ -1,0 +1,31 @@
+@import "../assets/styles/global";
+#top-navbar {
+  z-index: 10;
+}
+
+#sidebar {
+ .fixed;
+  .w(0);
+  z-index: 5;
+  left: -220px;
+  overflow: hidden;
+  .custom-transition(0.3s all linear);
+  @media @small {
+    left: 0;
+    .w(220px);
+  }
+
+}
+#right_app {
+  .w(100%);
+  vertical-align: top;
+  .relative;
+  left: 0;
+
+  .custom-transition(0.3s all linear);
+  @media @small {
+    .w-calc(100%, 220px);
+    left: 220px;
+
+  }
+}

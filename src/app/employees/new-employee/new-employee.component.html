@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <h5>Nowy pracownik</h5>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput type="number" placeholder="Numer Pracowniczy" formControlName="id">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Imie" formControlName="first_name">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nazwisko"  formControlName="last_name">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput type="number" placeholder="Data Urodzenia" formControlName="birthday">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput type="number" placeholder="Pesel" formControlName="pesel">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput type="email" placeholder="Email" formControlName="email">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Dzial:" formControlName="department">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Stanowisko" formControlName="position">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Wynagrodzenie" type="number" formControlName="salaries">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Plec"  formControlName="sex">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Wyksztalcenie" formControlName="education">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Poczatek pracy" type="number" formControlName="start_date">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Dlugosc umowy" type="number" formControlName="contract_period">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Doswiadczenie dotychczasowe" type="number" formControlName="experience_all">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Umowa" type="number" formControlName="experience_here">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div id="add_btn_wrapper">
+    <button mat-raised-button (click)="form.reset()">Wyczysc</button>
+    <button mat-raised-button (click)="closeIt()">Anuluj</button>
+    <button mat-raised-button (click)="Add_Employee()" [disabled]="form.invalid">Dodaj +</button>
+  </div>
+
+
+</div>

@@ -1,0 +1,109 @@
+@import "animations";
+@import "variables";
+
+
+
+//Short codes
+
+
+      //positions
+  .relative {
+    position: relative;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .d-inline {
+    display: inline-block;
+  }
+  .d-block {
+    display: block;
+  }
+  .d-flex {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -o-flex;
+  }
+  .fixed {
+    position: fixed;
+  }
+
+
+  //text
+
+  .center-text {
+    text-align: center;
+  }
+
+
+  //another
+
+  .w(@what) {
+    width: @what;
+  }
+.w-calc(@first, @sec) {
+  width: calc(@first - @sec);
+}
+.c-pointer {
+  cursor: pointer;
+}
+
+        //animation
+        .keyframes (@name, @what-to-do) {
+
+          @-webkit-keyframes @name {
+            @what-to-do();
+          }
+          @-ms-keyframes @name {
+            @what-to-do();
+          }
+          @keyframes @name {
+            @what-to-do();
+          }
+          @-moz-keyframes @name {
+            @what-to-do();
+          }
+          @-o-keyframes @name {
+            @what-to-do();
+          }
+        }
+
+        .animation(@arguments) {
+          -webkit-animation: @arguments;
+          -moz-animation: @arguments;
+          animation: @arguments;
+        }
+        .custom-transition (@how) {
+          -webkit-transition: @how;
+          transition: @how;
+          -moz-transition: @how;
+        }
+
+
+
+
+
+
+
+
+
+
+
+//global classes
+.start_header {
+  background-color: gray;
+  color: @main_color;
+  height: 38px;
+  -webkit-box-shadow: 0 2px 8px #cccccc;
+  box-shadow: 0 2px 8px #cccccc;
+  i {
+    margin-right: 10px;
+    margin-left: 20px;
+  }
+  h5 {
+    line-height: 38px;
+  }
+}
+
+

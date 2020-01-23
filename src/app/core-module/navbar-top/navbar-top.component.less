@@ -1,0 +1,21 @@
+@import "../../../assets/styles/global";
+
+.navbar {
+  background-color: @left_navbar;
+  div {
+    .d-inline;
+  }
+}
+#user_info {
+  .d-inline;
+  span {
+    .d-block;
+    line-height: 20px;
+    &:first-child {
+      color: white;
+    }
+    &:last-child {
+      color: @main_color;
+    }
+  }
+}
