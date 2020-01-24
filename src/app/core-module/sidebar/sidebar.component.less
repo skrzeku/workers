@@ -7,7 +7,7 @@
   .relative;
   .w(220px);
   height: 100vh;
-  background-color: @left_navbar;
+  background-color: @bg_color;
 }
 #sidebar_header {
   .d-flex;
@@ -35,8 +35,8 @@
   padding: 0;
 }
 .active_item {
-  -webkit-box-shadow: 2px -1px 0 #189279 inset;
-  box-shadow: 2px -1px 0 #189279 inset;
+  -webkit-box-shadow: 2px -1px 0 @main_color inset;
+  box-shadow: 2px -1px 0 @main_color inset;
   border-bottom-left-radius: 5px;
   background: #131313 !important;
   color: #ffffff;
@@ -45,6 +45,7 @@
   padding: 12px 20px;
   .c-pointer;
   .custom-transition(0.3s all ease);
+  outline: 0;
   a {
     color: white !important;
     i {

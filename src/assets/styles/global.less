@@ -92,7 +92,7 @@
 
 //global classes
 .start_header {
-  background-color: gray;
+  background-color: @bg_color;
   color: @main_color;
   height: 38px;
   -webkit-box-shadow: 0 2px 8px #cccccc;
@@ -103,6 +103,40 @@
   }
   h5 {
     line-height: 38px;
+  }
+}
+
+.mattable_wrapper {
+  .w(90%);
+  margin: 20px auto;
+  overflow: auto;
+  height: 250px;
+  table {
+    .w(100%);
+
+  }
+  @media @medium {
+    .w(80%);
+    height: 390px;
+  }
+}
+.succes_snack {
+  background-color: green !important;
+}
+.top_filter_wrapper {
+  .w(100%);
+  text-align: right;
+  margin: 20px auto;
+  @media @medium {
+    .w(80%);
+  }
+  mat-form-field {
+    max-width: 150px;
+    margin-left: 20px;
+  }
+  form {
+    .d-inline;
+    margin-right: 20px;
   }
 }
 

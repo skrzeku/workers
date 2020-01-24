@@ -4,8 +4,9 @@
 }
 
 #sidebar {
- .fixed;
+.relative;
   .w(0);
+ .d-inline;
   z-index: 5;
   left: -220px;
   overflow: hidden;
@@ -19,13 +20,14 @@
 #right_app {
   .w(100%);
   vertical-align: top;
+  .d-inline;
   .relative;
   left: 0;
 
   .custom-transition(0.3s all linear);
   @media @small {
     .w-calc(100%, 220px);
-    left: 220px;
+
 
   }
 }

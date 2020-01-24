@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {MatDialog, MatSort, MatTableDataSource} from "@angular/material";
 import {Employee} from "../core-module/models/employee";
 import {NewEmployeeComponent} from "./new-employee/new-employee.component";
@@ -26,7 +26,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   showright = false;
-  departments = ['IT', 'Księgowość', 'Administracja', 'Ochrona', 'Pracownik Produkcji']
+  departments = ['IT', 'Księgowość', 'Administracja', 'Ochrona', 'Pracownik Produkcji'];
 
 
 

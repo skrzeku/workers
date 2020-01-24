@@ -73,7 +73,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="salaries">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Wynagrodzenie </th>
-            <td mat-cell *matCellDef="let element"> {{element.salaries}}</td>
+            <td mat-cell *matCellDef="let element"> {{element.salaries}} PLN</td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -94,7 +94,7 @@
             <div>{{employee?.id}}</div>
             <div>{{employee?.first_name}} {{employee?.last_name}}</div>
             <div>Pesel: {{employee?.pesel}}</div>
-            <div>Data Urodzenia: {{employee?.birthday}}</div>
+            <div>Data Urodzenia: {{employee?.birthday | date}}</div>
           </div>
           <i class="fas fa-times" (click)="closeInfo()" matTooltip="Zamknij"></i>
 

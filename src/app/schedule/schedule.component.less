@@ -1,0 +1,32 @@
+@import "../../assets/styles/global";
+
+
+table {
+  .w(100%);
+  td {
+    border-right: solid 1px gray !important;
+    .center-text;
+  }
+  th {
+    .center-text;
+  }
+
+}
+.example-container {
+  height: 400px;
+  overflow: auto;
+  @media @medium {
+    .w(80%);
+   margin: 20px auto;
+  }
+}
+#date_wrappers {
+  text-align: right;
+  mat-form-field {
+    max-width: 100px;
+  }
+  @media @medium {
+    .w(80%);
+    margin: 0 auto;
+  }
+}

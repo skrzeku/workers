@@ -4,18 +4,23 @@ export interface Employee {
   last_name: string,
   department: string,
   position: string,
+  full_name: string,
   salaries: number,
   sex: string,
   education: string,
   start_date: number,
   contract_period: number,
-  CV: string,
+  contract_end: number,
+  CV: any,
   experience_all: number,
   experience_here: number,
   key: string,
-  birthday: number,
+  birthday: any,
   nationality: string,
   pesel: number,
-  email: string
-
+  email: string,
+  schedule: [{
+    day: number,
+    what: string
+  }]
 }

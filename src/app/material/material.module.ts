@@ -3,10 +3,27 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatRadioModule,
-  MatSelectModule, MatSliderModule, MatSnackBarConfig,
-  MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule, MatTooltipModule
+  MatCardModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule, MatNativeDateModule, MatPaginatorModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatSnackBarConfig,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatTooltipModule,
 } from '@angular/material';
+
+import { MatFileUploadModule } from 'angular-material-fileupload';
+import {FormsModule} from "@angular/forms";
+
 
 const MY_SNACK_GLOBAL_CONFIG: MatSnackBarConfig = {
   duration: 3000,
@@ -35,7 +52,13 @@ const Materials = [
   MatInputModule,
   MatTableModule,
   MatSortModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatFileUploadModule,
+  MatPaginatorModule,
+  FormsModule,
+
 ];
 
 

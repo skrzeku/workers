@@ -13,6 +13,8 @@ import {environment} from "../environments/environment";
 import {MaterialModule} from "./material/material.module";
 import {MainService} from "./core-module/services/main.service";
 import {AngularFireDatabaseModule} from '@angular/fire/database'
+import {MatFileUploadModule} from "angular-material-fileupload";
+import {ScheduleModule} from "./schedule/schedule.module";
 
 
 
@@ -30,6 +32,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database'
     AngularFireModule.initializeApp(environment.firebase),
     MaterialModule,
     AngularFireDatabaseModule,
+    MatFileUploadModule
 
   ],
   providers: [MainService],
