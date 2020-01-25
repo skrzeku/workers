@@ -1,1 +1,18 @@
-<p>cancel-contract works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12"><h4>Pracownik: {{employee?.first_name}} {{employee?.last_name}}<i class="fas fa-times" (click)="close()"></i></h4></div>
+    <div class="col-4">Do końca umowy pozostalo: </div>
+    <div class="col-4">Okres wypowiedzenia wynosi: </div>
+    <div class="col-4">Ostatni dzień pracy: </div>
+    <div class="offset-2 col-8">
+      <mat-form-field>
+        <mat-label>Powód:</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+    <div class="modal_btn_wrappers col-12">
+      <button mat-raised-button (click)="close()">Anuluj</button>
+      <button mat-raised-button>Wypowiedz</button>
+    </div>
+  </div>
+</div>

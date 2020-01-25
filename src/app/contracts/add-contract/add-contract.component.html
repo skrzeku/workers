@@ -1,2 +1,8 @@
-<p>add-contract works!</p>
-{{employee.salaries}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12"><h4>Pracownik: {{employee?.first_name}} {{employee?.last_name}}<i class="fas fa-times" (click)="close()"></i></h4></div>
+    <div class="col-6"><div>Pracownik posiada obecnie umowę do: || Pracownik nie posiada obecnie umowy</div><div class="center-text"><button mat-raised-button (click)="OpenNewForm()">Dodaj</button></div></div>
+    <div class="col-6"><div>Chciałbyś dodać aneks do umowy? Zmienić wynagrodzenie, bądź okres trwania? </div><div class="center-text"><button mat-raised-button (click)="OpenEditform()">Zmień</button> </div></div>
+
+  </div>
+</div>

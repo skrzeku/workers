@@ -5,16 +5,17 @@ import {ContractsRoutingModule} from "./contracts-routing.module";
 import {MaterialModule} from "../material/material.module";
 import { AddContractComponent } from './add-contract/add-contract.component';
 import { CancelContractComponent } from './cancel-contract/cancel-contract.component';
+import { AddInsideComponent } from './add-contract/add-inside/add-inside.component';
 
 
 
 @NgModule({
-  declarations: [ContractsComponent, AddContractComponent, CancelContractComponent],
+  declarations: [ContractsComponent, AddContractComponent, CancelContractComponent, AddInsideComponent],
   imports: [
     CommonModule,
     ContractsRoutingModule,
     MaterialModule
   ],
-  entryComponents: [AddContractComponent, CancelContractComponent]
+  entryComponents: [AddContractComponent, CancelContractComponent, AddInsideComponent]
 })
 export class ContractsModule { }
