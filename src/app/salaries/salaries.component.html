@@ -3,11 +3,32 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 headers_section"><h3>IT</h3></div>
     <div class="col-12">
-      <button mat-raised-button (click)="Checkthis()">Check</button>
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource[0]">
+      <div class="top_filter_wrapper">
+        <form>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Osoba">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select multiple placeholder="Dział:">
+              <mat-option *ngFor="let depart of departments" [value]="depart">{{depart}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Wynagrodzenie (zł):">
+              <mat-option></mat-option>
+              <mat-option value="1"> < 2000 </mat-option>
+              <mat-option value="2"> 2000 - 3000 </mat-option>
+              <mat-option value="3"> 3000 - 4000 </mat-option>
+              <mat-option value="4"> 4000 - 5000 </mat-option>
+              <mat-option value="5"> > 5000 </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+        <button mat-raised-button class="main_button primary">Zastosuj</button>
+      </div>
+      <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> No. </th>
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -15,6 +36,10 @@
           <ng-container matColumnDef="full_name">
             <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
             <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef> Dział</th>
+            <td mat-cell *matCellDef="let element"> {{element.department}} </td>
           </ng-container>
 
           <ng-container matColumnDef="salaries">
@@ -26,120 +51,19 @@
             <th mat-header-cell *matHeaderCellDef> Koniec umowy </th>
             <td mat-cell *matCellDef="let element"> {{element.contract_end}} </td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
-    <div class="col-12 headers_section"><h3>Księgowość</h3></div>
-    <div class="col-12">
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource[1]">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="full_name">
-            <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
-            <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
+
+          <ng-container matColumnDef="payroll">
+            <th mat-header-cell *matHeaderCellDef> Lista płac</th>
+            <td mat-cell *matCellDef="let element"> listplac.pdf </td>
           </ng-container>
 
-          <ng-container matColumnDef="salaries">
-            <th mat-header-cell *matHeaderCellDef> Wynagrodzenie </th>
-            <td mat-cell *matCellDef="let element"> {{element.salaries}} </td>
-          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
 
-          <ng-container matColumnDef="end_contract">
-            <th mat-header-cell *matHeaderCellDef> Koniec umowy </th>
-            <td mat-cell *matCellDef="let element"> {{element.contract_end}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
-    <div class="col-12 headers_section"><h3>Administracja</h3></div>
-    <div class="col-12">
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource[2]">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="full_name">
-            <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
-            <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
-          </ng-container>
 
-          <ng-container matColumnDef="salaries">
-            <th mat-header-cell *matHeaderCellDef> Wynagrodzenie </th>
-            <td mat-cell *matCellDef="let element"> {{element.salaries}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="end_contract">
-            <th mat-header-cell *matHeaderCellDef> Koniec umowy </th>
-            <td mat-cell *matCellDef="let element"> {{element.contract_end}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
-    <div class="col-12 headers_section"><h3>Ochrona</h3></div>
-    <div class="col-12">
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource[3]">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="full_name">
-            <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
-            <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
-          </ng-container>
-          <ng-container matColumnDef="salaries">
-            <th mat-header-cell *matHeaderCellDef> Wynagrodzenie </th>
-            <td mat-cell *matCellDef="let element"> {{element.salaries}} </td>
-          </ng-container>
-          <ng-container matColumnDef="end_contract">
-            <th mat-header-cell *matHeaderCellDef> Koniec umowy </th>
-            <td mat-cell *matCellDef="let element"> {{element.contract_end}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
-    <div class="col-12 headers_section"><h3>Produkcja</h3></div>
-    <div class="col-12">
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource[4]">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="full_name">
-            <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
-            <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
-          </ng-container>
-          <ng-container matColumnDef="salaries">
-            <th mat-header-cell *matHeaderCellDef> Wynagrodzenie </th>
-            <td mat-cell *matCellDef="let element"> {{element.salaries}} </td>
-          </ng-container>
-          <ng-container matColumnDef="end_contract">
-            <th mat-header-cell *matHeaderCellDef> Koniec umowy </th>
-            <td mat-cell *matCellDef="let element"> {{element.contract_end}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
     <div class="col-12 headers_section"><h3>Podsumowanie</h3></div>
     <div class="col-12 offset-md-2 col-md-8 mt-5">
       <div class="row">
@@ -154,24 +78,6 @@
         </div>
         <div class="col-6">
           <h5 class="center-text">Srednie wynagrodzenie:</h5>
-          <pre>Ogółem: {{avarage}} PLN</pre>
-          <pre>IT: {{salaries_arr[0]}} PLN</pre>
-          <pre>Księgowość: {{salaries_arr[1]}} PLN</pre>
-          <pre>Administracja: {{salaries_arr[2]}} PLN</pre>
-          <pre>Ochrona: {{salaries_arr[3]}} PLN</pre>
-          <pre>Produkcja: {{salaries_arr[4]}} PLN</pre>
-        </div>
-        <div class="col-6">
-          <h5 class="center-text">Zus: 20,48%</h5>
-          <pre>Ogółem: {{avarage}} PLN</pre>
-          <pre>IT: {{salaries_arr[0]}} PLN</pre>
-          <pre>Księgowość: {{salaries_arr[1]}} PLN</pre>
-          <pre>Administracja: {{salaries_arr[2]}} PLN</pre>
-          <pre>Ochrona: {{salaries_arr[3]}} PLN</pre>
-          <pre>Produkcja: {{salaries_arr[4]}} PLN</pre>
-        </div>
-        <div class="col-6">
-          <h5 class="center-text">Podatek dochodowy:</h5>
           <pre>Ogółem: {{avarage}} PLN</pre>
           <pre>IT: {{salaries_arr[0]}} PLN</pre>
           <pre>Księgowość: {{salaries_arr[1]}} PLN</pre>

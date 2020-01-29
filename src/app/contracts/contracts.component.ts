@@ -44,10 +44,10 @@ export class ContractsComponent implements OnInit, AfterViewInit {
   }
 
   addContract(): void {
-    this.dialog.open(AddContractComponent, {data: this.employee});
+    this.dialog.open(AddContractComponent, {data: this.employee, autoFocus: false});
   }
   cancelContract(): void {
-    this.dialog.open(CancelContractComponent, {data: this.employee});
+    this.dialog.open(CancelContractComponent, {data: this.employee, autoFocus: false});
   }
   selectIt(employee: Employee, event) {
     this.rows.forEach((one)=> {

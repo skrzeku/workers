@@ -2,7 +2,7 @@
   <h5><i class="fas fa-file-contract"></i>Umowy</h5>
 </div>
 
-<div class="containter-fluid">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="top_filter_wrapper">
@@ -16,10 +16,10 @@
           </mat-select>
         </mat-form-field>
         </form>
-        <button mat-raised-button>Zastosuj</button>
+        <button mat-raised-button class="main_button primary">Zastosuj</button>
       </div>
-      <div class="mattable_wrapper mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <div class=" example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
 
           <!-- Position Column -->
           <ng-container matColumnDef="number">
@@ -60,9 +60,11 @@
           <tr mat-row #rows *matRowDef="let row; columns: displayedColumns;" class="contact_row" (click)="selectIt(row, $event)" ></tr>
         </table>
       </div>
-      <div class="contracts_btns center-text">
-        <button mat-raised-button (click)="addContract()" [disabled]="!employee">Dodaj umowę +</button>
-        <button mat-raised-button (click)="cancelContract()" [disabled]="!employee">Wypowiedz umowę x</button>
+      Osoba bez umowy na czerwono i na gorze!
+      osoby ktorym konczy się umowa <14 dni na zółto?
+      <div class="some_buttons center-text">
+        <button mat-raised-button (click)="addContract()" [disabled]="!employee" class="main_button primary">Dodaj umowę +</button>
+        <button mat-raised-button (click)="cancelContract()" [disabled]="!employee" class="main_button warning">Wypowiedz umowę x</button>
       </div>
 
 

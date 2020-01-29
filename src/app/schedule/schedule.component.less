@@ -12,21 +12,21 @@ table {
   }
 
 }
-.example-container {
-  height: 400px;
-  overflow: auto;
-  @media @medium {
-    .w(80%);
-   margin: 20px auto;
-  }
+
+#hidden_action {
+  position: fixed;
+  top: 83px;
+  right: 5px;
+  border: solid 2px red;
+  background-color: white;
 }
-#date_wrappers {
-  text-align: right;
+.day_action {
+  border: solid 2px red;
+  background-color: white;
+  .w(150px);
+  .center-text;
   mat-form-field {
-    max-width: 100px;
-  }
-  @media @medium {
-    .w(80%);
-    margin: 0 auto;
+    .w(90%);
   }
 }
+

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {Employee} from "../../core-module/models/employee";
-import {AddInsideComponent} from "./add-inside/add-inside.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-contract',
@@ -14,20 +14,21 @@ export class AddContractComponent implements OnInit {
 
   constructor(private dialogref: MatDialogRef<AddContractComponent>,
               @Inject(MAT_DIALOG_DATA) private data,
-              private dialog: MatDialog) {
+              private router: Router) {
     this.employee = data;
   }
 
   ngOnInit() {
   }
 
+  GotoNewContract(employee: Employee, edit?: boolean): void {
+    this.router.navigate(['contracts/new']).then(()=> {
+      this.dialogref.close();
+    });
+    console.log(edit);
+  }
 
-  OpenEditform(): void {
-    this.dialog.open(AddInsideComponent, {data: this.employee});
-  }
-  OpenNewForm(): void {
-    this.dialog.open(AddInsideComponent, {data: this.employee});
-  }
+
 
   close(): void {
     this.dialogref.close();

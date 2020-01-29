@@ -6,6 +6,9 @@ import {MatFormFieldModule, MatInputModule, MatSortModule, MatTableModule} from 
 import {MaterialModule} from "../material/material.module";
 import { NewEmployeeComponent } from './new-employee/new-employee.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {BottomComponent} from "../core-module/bottom/bottom.component";
+import {CoreModule} from "../core-module/core.module";
 
 
 
@@ -15,8 +18,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     EmployeesRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxChartsModule,
+    CoreModule
   ],
-  entryComponents: [NewEmployeeComponent]
+  entryComponents: [BottomComponent]
 })
 export class EmployeesModule { }

@@ -5,10 +5,11 @@
   &:hover {
     background-color: lightgray;
   }
-  &:active {
-    background-color: gray;
-  }
 }
 .selected_row {
-  background-color: red !important;
+  background-color: @bg_color !important;
+  .mat-cell {
+    color: @natural_color !important;
+  }
 }
+

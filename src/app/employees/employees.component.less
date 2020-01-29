@@ -29,18 +29,18 @@ table {
 .right_employees_inside {
 
   right: -300px;
-  top: 15px;
-  .relative;
+  top: 50%;
+  transform: translateY(-50%);
+  .fixed;
   padding-top: 10px;
   opacity: 0;
   height: auto;
-  z-index: 3;
+  z-index: -1;
   background-color: white;
   .custom-transition(0.3s all ease-out);
  box-shadow:  0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
   @media @medium {
-    .absolute;
-    top: 45px;
+    //top: 45px;
   }
 
   .fa-times {
@@ -58,6 +58,7 @@ table {
   right: 0;
   opacity: 1;
   .custom-transition(0.3s all ease);
+  z-index: 1;
 
   @media @medium {
     right: 5%;
@@ -85,10 +86,7 @@ table {
     height: auto;
   }
 }
-.mat-elevation-z8 {
-  width: 100% !important;
-  max-width: 100% !important;
-}
+
 #action_wrapper {
   .center-text;
   padding-bottom: 15px;
@@ -105,4 +103,14 @@ table {
 ::ng-deep .tool-tip {
   background-color: red !important;
   font-size: 30px;
+}
+
+.worker_img {
+  background-image: url("../../assets/images/Unknown.jpeg");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  .w(60%);
+  height: 100px;
+  margin: 0 auto;
 }

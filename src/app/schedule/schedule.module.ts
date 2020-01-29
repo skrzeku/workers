@@ -4,16 +4,20 @@ import { ScheduleComponent } from './schedule.component';
 import {ScheduleRoutingModule} from "./schedule-routing.module";
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ActionDialogComponent } from './action-dialog/action-dialog.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 
 
 @NgModule({
-  declarations: [ScheduleComponent],
+  declarations: [ScheduleComponent, ActionDialogComponent],
   imports: [
     CommonModule,
     ScheduleRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgxChartsModule
+  ],
+  entryComponents: [ActionDialogComponent]
 })
 export class ScheduleModule { }

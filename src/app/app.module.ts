@@ -7,14 +7,14 @@ import {StartModules} from "./start/start.module";
 import {CoreModule} from "./core-module/core.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireModule } from "@angular/fire";
 import {environment} from "../environments/environment";
 import {MaterialModule} from "./material/material.module";
 import {MainService} from "./core-module/services/main.service";
 import {AngularFireDatabaseModule} from '@angular/fire/database'
 import {MatFileUploadModule} from "angular-material-fileupload";
-import {ScheduleModule} from "./schedule/schedule.module";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+
 
 
 
@@ -32,7 +32,8 @@ import {ScheduleModule} from "./schedule/schedule.module";
     AngularFireModule.initializeApp(environment.firebase),
     MaterialModule,
     AngularFireDatabaseModule,
-    MatFileUploadModule
+    MatFileUploadModule,
+    NgxChartsModule
 
   ],
   providers: [MainService],

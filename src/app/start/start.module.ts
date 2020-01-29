@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StartComponent } from './start.component';
 import {MaterialModule} from "../material/material.module";
 import {MatButtonModule} from "@angular/material";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 
 
@@ -11,7 +12,8 @@ import {MatButtonModule} from "@angular/material";
   declarations: [StartComponent],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    NgxChartsModule
   ],
   exports: [StartComponent]
 })

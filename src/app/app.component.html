@@ -5,12 +5,15 @@
 <div id="top-navbar">
 <app-navbar-top></app-navbar-top>
 </div>
-<div id="sidebar">
-  <app-sidebar></app-sidebar>
+<div class="sidebar" [ngClass]="{'hidden_sidebar': hidden_sidebar}">
+  <app-sidebar (naviOutput)="getOutput($event)"></app-sidebar>
 </div>
-<div id="right_app">
+<div class="right_app" [ngClass]="{'hidden_right': hidden_sidebar}">
   <router-outlet></router-outlet>
 </div>
-<i class="fa-secondary"></i>
+<div id="footer">
+  <app-footer></app-footer>
+</div>
+
 
 

@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'workers';
+  hidden_sidebar: boolean = false;
+
+
+  getOutput(any: boolean): void {
+    this.hidden_sidebar = any;
+  }
 }
+
+

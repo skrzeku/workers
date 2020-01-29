@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {Moment} from 'moment';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepicker} from "@angular/material";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepicker, MatDialog} from "@angular/material";
 import {FormControl} from "@angular/forms";
 import {MainService} from "../core-module/services/main.service";
 import {Employee} from "../core-module/models/employee";
+import {ActionDialogComponent} from "./action-dialog/action-dialog.component";
 
 const moment =  _moment;
 
@@ -65,12 +66,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent implements OnInit, AfterViewInit {
   date = new FormControl(moment());
   table_year = 2020;
   table_month = 0;
   maxDate =  moment();
   minDate = new Date(2019, 0, 1);
+  @ViewChildren('rows', {read: ElementRef}) rows: QueryList<ElementRef>;
 
 
 
@@ -86,9 +88,43 @@ export class ScheduleComponent implements OnInit {
   dataSource: Employee[];
 
 
+  //charts
+  view: any[] = [400, 300];
+  single: any[] = [{
+    "name": "Ogółem",
+    "value": 48
+  },
+    {
+      "name": "IT",
+      "value": 8
+    },
+    {
+      "name": "Księgowość",
+      "value": 10
+    },
+    {
+      "name": "UK",
+      "value": 13
+    },
+    {
+      "name": "Italy",
+      "value": 14
+    },
+    {
+      "name": "Spain",
+      "value": 8
+    }];
+
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
+  cardColor: string = '#232837';
 
 
-  constructor(private mainservice: MainService) { }
+
+
+  constructor(private mainservice: MainService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.pushdays();
@@ -97,6 +133,10 @@ export class ScheduleComponent implements OnInit {
       this.dataSource = employees;
     });
   }
+  ngAfterViewInit(): void {
+
+  }
+
   pushdays(): void {
 
     //Dodac zera dla 9 elementow!!
@@ -122,6 +162,9 @@ export class ScheduleComponent implements OnInit {
 
     this.date.setValue(ctrlValue);
     datepicker.close();
+  }
+  addAbsence(lol: any): void {
+    console.log(lol);
   }
 
 

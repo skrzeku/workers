@@ -3,47 +3,37 @@
 </div>
 <div class="container-fluid big_container">
   <div class="row">
-    <div class="col-12 col-lg-8">
-      <div id="filter_wrapper">
-        <div class="one_filter">
+    <div class="col-12 col-lg-12 over-hidden">
+      <div class="top_filter_wrapper">
+        <form>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Nazwa">
           </mat-form-field>
-        </div>
-        <div class="one_filter">
+
           <mat-form-field>
             <mat-select multiple>
               <mat-option *ngFor="let depart of departments" [value]="depart">{{depart}}</mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="one_filter">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Wynagrodzenie">
-          </mat-form-field>
-        </div>
-        <button mat-raised-button>Filtruj</button>
-      </div>
-      <div class="center-text">
-        <button mat-raised-button (click)="filters_shown = !filters_shown">Zaawansowane filtrowanie</button>
-      </div>
-      <div class="advanced_filters" *ngIf="filters_shown">
-        <div class="one_filter">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nazwa">
-          </mat-form-field>
-        </div>
-        <div class="one_filter">
+
           <mat-form-field>
-            <mat-select multiple>
-              <mat-option *ngFor="let depart of departments" [value]="depart">{{depart}}</mat-option>
+            <mat-select placeholder="Wynagrodzenie (zł):">
+              <mat-option></mat-option>
+              <mat-option value="1"> < 2000 </mat-option>
+              <mat-option value="2"> 2000 - 3000 </mat-option>
+              <mat-option value="3"> 3000 - 4000 </mat-option>
+              <mat-option value="4"> 4000 - 5000 </mat-option>
+              <mat-option value="5"> > 5000 </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
+        </form>
+
+        <button mat-raised-button class="main_button primary">Filtruj</button>
+
+
       </div>
 
-
-      <div class="employees_wrapper">
+      <div class="example-container mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
           <!-- Position Column -->
@@ -79,90 +69,109 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mytr" (click)="detailsEmployee(row)"></tr>
         </table>
-        <div class="mt-3">
-          <button mat-raised-button (click)="AddEmployer()">Dodaj Pracownika</button>
-        </div>
 
       </div>
-    </div>
-      <div class="col-12 col-lg-5 right_employees_inside" [ngClass]="{'right_shown': showright}">
+      <div class="center-text mt-3">
+        <button mat-raised-button (click)="AddEmployer()" class="main_button primary">Dodaj Pracownika</button>
+      </div>
+      <div class="col-12 p-3">
+        <h5 class="dashboard_header">Ostatnio dodani</h5>
         <div class="row">
-          <div class="col-4 employee_img" >
-            <img src="../../assets/images/Unknown.jpeg">
+          <div class="col-4 col-sm-3 center-text">
+            <div class="worker_img"></div>
+            <div>{{employees[0]?.last_name}}</div>
+            <div>{{employees[0]?.department}}</div>
+            <div>{{employees[0]?.position}}</div>
+            <div>{{employees[0]?.age}}</div>
           </div>
-          <div class="col-6">
-            <div>{{employee?.id}}</div>
-            <div>{{employee?.first_name}} {{employee?.last_name}}</div>
-            <div>Pesel: {{employee?.pesel}}</div>
-            <div>Data Urodzenia: {{employee?.birthday | date}}</div>
+          <div class="col-4 col-sm-3 center-text">
+            <div class="worker_img"></div>
+            <div>{{employees[10]?.last_name}}</div>
+            <div>{{employees[10]?.department}}</div>
+            <div>{{employees[10]?.position}}</div>
+            <div>{{employees[10]?.age}}</div>
+          </div>
+          <div class="col-4 col-sm-3 center-text">
+            <div class="worker_img"></div>
+            <div>{{employees[11]?.last_name}}</div>
+            <div>{{employees[11]?.department}}</div>
+            <div>{{employees[11]?.position}}</div>
+            <div>{{employees[11]?.age}}</div>
+          </div>
+          <div class="col-sm-3 d-none d-sm-inline-block center-text">
+            <div class="worker_img"></div>
+            <div>{{employees[9]?.last_name}}</div>
+            <div>{{employees[9]?.department}}</div>
+            <div>{{employees[9]?.position}}</div>
+            <div>{{employees[9]?.age}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+          <!-- Right side-->
+
+      <div class="right_employees_inside" [ngClass]="{'right_shown': showright}">
+        <div class="row">
+          <div class="col-4 employee_img">
+            <img src="../../assets/images/Unknown.jpeg">
+            <div>{{employee?.last_name}}</div>  <!-- full_nem-->
+            <div>{{employee?.position}}</div>
+          </div>
+          <div class="col-8">
+           <div class="row">
+             <div class="col-6">
+               <h6><i class="far fa-user"></i>Dane Personalne:</h6>
+               <div>Imię: {{employee?.first_name}}</div>
+               <div>Nazwisko: {{employee?.last_name}}</div>
+               <div>Pesel: {{employee?.pesel}}</div>
+               <div>Data Urodzenia: {{employee?.birthday | date}}</div>
+               <div>Wiek: ??</div>
+               <div>Narodowość: ?? dodać</div>
+               <div>Płeć: {{employee?.sex}}</div>
+               <div>Email: {{employee?.email}}</div>
+               <div>Telefon: {{employee?.phone}}</div>
+
+             </div>
+             <div class="col-6">
+               <h6><i class="far fa-user"></i>Dane Organizacyjne:</h6>
+               <div>Dział: {{employee?.department}}</div>
+               <div>Stanowisko: {{employee?.position}}</div>
+               <div>Wykształcenie: {{employee?.education}}</div>
+               <div>Rodzaj umowy: Umowa o pracę</div>
+               <div>Koniec umowy: {{employee?.contract_end}}</div>
+               <div>Staż pracy: Obliczyć</div>
+               <div>Wynagordzenie: {{employee?.pesel}}</div>
+               <div>Nieobecności: Obliczyć</div>
+               <div>Pozostały urlop: Obliczyć</div>
+             </div>
+             <div class="col-6">
+               <h6><i class="fas fa-tools"></i>Akcje:</h6>
+               <div id="action_wrapper">
+                 <i class="fas fa-at" [matTooltip]="employee?.email" [matTooltipClass]="'tool-tip'"></i>
+                 <i class="fas fa-edit" matTooltip="Edycja Pracownika"></i>
+                 <i class="fas fa-user-times" matTooltip="Usunięcie Pracownika" (click)="RemoveEmploee()"></i>
+                 <i class="fas fa-file-signature" matTooltip="Dodaj Umowę"></i>
+               </div>
+             </div>
+             <div class="col-6">
+               <h6><i class="fas fa-paperclip"></i>Załączniki:</h6>
+               <div>
+                 <a>Umowa.pdf</a>
+                 <a>Lista_plac.pdf</a>
+               </div>
+             </div>
+           </div>
           </div>
           <i class="fas fa-times" (click)="closeInfo()" matTooltip="Zamknij"></i>
 
-          <div class="col-12">
-            <table id="employee_table">
-              <h6><i class="far fa-user"></i>Dane Pracownika:</h6>
-              <tr>
-                <td class="first_td">Dział:</td>
-                <td>{{employee?.department}}</td>
-              </tr>
-              <tr>
-                <td class="first_td">Stanowisko:</td>
-                <td>{{employee?.position}}</td>
-              </tr>
-              <tr>
-                <td class="first_td">Rodzaj Umowy:</td>
-                <td><a href="#">Umowa o prace</a></td>
-              </tr>
-              <tr>
-                <td class="first_td">Umowa od:</td>
-                <td>{{employee?.start_date}}</td>
-              </tr>
-              <tr>
-                <td class="first_td">Umowa do:</td>
-                <td>{{employee?.contract_period}}</td>
-              </tr>
-              <tr>
-                <td class="first_td">Wynagrodzenie(brutto):</td>
-                <td>{{employee?.salaries}} zł</td>
-              </tr>
-              <tr>
-              <td class="first_td">Wykształcenie:</td>
-              <td>{{employee?.education}}</td>
-            </tr>
-              <tr>
-                <td class="first_td">Staż pracy:</td>
-                <td>Obliczenie</td>
-              </tr>
-              <tr>
-                <td class="first_td">Dostępny urlop:</td>
-                <td>Obliczenie</td>
-              </tr>
-              <tr>
-                <td class="first_td">Wykorzystany urlop:</td>
-                <td>Obliczenie</td>
-              </tr>
-              <tr>
-                <td class="first_td">Nieobecności:</td>
-                <td><a href="">Liczba dni</a></td>
-              </tr>
-              <tr>
-                <td class="first_td">Grafik:</td>
-                <td><a href="">Grafik</a></td>
-              </tr>
-              <tr>
-                <td class="first_td">CV:</td>
-                <td><a href="">CV</a></td>
-              </tr>
-              <h6><i class="fas fa-tools"></i>Akcje:</h6>
-            </table>
-            <div id="action_wrapper">
-              <i class="fas fa-at" matTooltip="Napisz" [matTooltipClass]="'tool-tip'"></i>
-              <i class="fas fa-edit" matTooltip="Edycja Pracownika"></i>
-              <i class="fas fa-user-times" matTooltip="Usunięcie Pracownika"></i>
-              <i class="fas fa-file-signature" matTooltip="Dodaj Umowę"></i>
-            </div>
+
+
           </div>
-        </div>
+
 
       </div>
     </div>

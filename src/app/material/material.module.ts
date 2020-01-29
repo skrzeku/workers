@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatAutocompleteModule,
+  MatAutocompleteModule, MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -58,6 +58,7 @@ const Materials = [
   MatFileUploadModule,
   MatPaginatorModule,
   FormsModule,
+  MatBottomSheetModule
 
 ];
 

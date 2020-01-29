@@ -1,6 +1,8 @@
 <div class="left_sidebar">
-  <div id="sidebar_header"><div>Navigation</div><div class="left-sidebar-toggle"><i class="fas fa-arrow-left"></i></div></div>
-  <div class="sidebar_main">
+  <div class="sidebar_header" [ngClass]="{'hide_header': navibool}"><h4 id="first_div">My Company</h4> <div class="relative">Kadry i płace<span><i class="fas fa-bars" (click)="sendOutput()"></i></span></div>
+  </div>
+
+  <div class="sidebar_main relative">
     <nav>
       <ul class="left_nav_list">
         <li class="nav_item" routerLinkActive="active_item" [routerLinkActiveOptions]="{exact: true}" routerLink=""><a><i class="fas fa-home"></i>Przegląd</a></li>

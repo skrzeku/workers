@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {MatDialog, MatSort, MatTableDataSource} from "@angular/material";
+import {MatBottomSheet, MatDialog, MatSnackBar, MatSort, MatTableDataSource} from "@angular/material";
 import {Employee} from "../core-module/models/employee";
 import {NewEmployeeComponent} from "./new-employee/new-employee.component";
 import {MainService} from "../core-module/services/main.service";
+import {Router} from "@angular/router";
+import {BottomComponent} from "../core-module/bottom/bottom.component";
 
 
 
@@ -30,8 +32,19 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
 
 
 
+  //pie
+
+
+  // options
+
+
+
   constructor(private dialog: MatDialog,
-              private mainservice: MainService) { }
+              private mainservice: MainService,
+              private router: Router,
+              private _bottomSheet: MatBottomSheet,
+              private snack: MatSnackBar) {
+  }
 
   ngOnInit() {
 
@@ -48,8 +61,10 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
 
   }
 
+
   AddEmployer(): void {
-    this.dialog.open(NewEmployeeComponent);
+    this.router.navigate(['employees/new']);
+
   }
   detailsEmployee(employe: Employee): void {
     this.employee = employe;
@@ -58,5 +73,15 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
   closeInfo(): void {
     this.showright = false;
   }
+  RemoveEmploee() {
+    if (this.employee.contract_end < +new Date()) {
+      this.snack.open('Nie można usunąć pracownika, ponieważ posiada ważną umowę');
+      return false;
+    }
+  this._bottomSheet.open(BottomComponent, {autoFocus: false});
+  }
+
+
+
 
 }

@@ -1,6 +1,16 @@
 @import "animations";
 @import "variables";
 
+//fonts
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Palanquin', sans-serif;
+  font-weight: bold;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  color: @bg_color;
+}
+
 
 
 //Short codes
@@ -27,6 +37,9 @@
   }
   .fixed {
     position: fixed;
+  }
+  .over-hidden {
+    overflow: hidden;
   }
 
 
@@ -93,17 +106,20 @@
 //global classes
 .start_header {
   background-color: @bg_color;
-  color: @main_color;
+  color: @natural_color;
   height: 38px;
   -webkit-box-shadow: 0 2px 8px #cccccc;
   box-shadow: 0 2px 8px #cccccc;
   i {
     margin-right: 10px;
     margin-left: 20px;
+    color: @main_color;
   }
   h5 {
     line-height: 38px;
+
   }
+
 }
 
 .mattable_wrapper {
@@ -131,13 +147,79 @@
     .w(80%);
   }
   mat-form-field {
-    max-width: 150px;
+    max-width: 100px;
     margin-left: 20px;
+    @media @small {
+      max-width: 150px;
+    }
   }
   form {
     .d-inline;
     margin-right: 20px;
   }
 }
+
+.example-container {
+  height: 400px;
+  overflow: auto;
+  .w(90%);
+  @media @medium {
+    .w(80%);
+    margin: 20px auto;
+  }
+}
+.main_button {
+
+
+  .custom-transition(0.3s all ease);
+  //box-shadow: 0  17px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.5);
+
+  &:hover {
+
+    border-radius: 20px;
+  }
+}
+.primary {
+  border: @bg_color solid 1px;
+  background-color: @bg_color;
+  color: @natural_color;
+  &:hover {
+    background-color: @natural_color;
+    color: @bg_color;
+  }
+}
+.warning {
+  border: @bg_color solid 1px;
+  background-color: @natural_color;
+  color: @bg_color;
+  &:hover {
+    background-color: @bg_color;
+    color: @natural_color;
+  }
+}
+.some_buttons {
+  padding: 30px;
+  .center-text;
+  button {
+    margin-right: 15px;
+  }
+}
+.dashboard_header {
+  .relative;
+  padding-left: 15px;
+  &:before {
+    .absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    width: 10px;
+    height: 100%;
+    background-color: @bg_color;
+  }
+}
+
 
 

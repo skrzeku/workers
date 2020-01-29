@@ -19,6 +19,8 @@ export interface Employee {
   nationality: string,
   pesel: number,
   email: string,
+  phone: string,
+  age: number,
   schedule: [{
     day: number,
     what: string

@@ -2,6 +2,7 @@ import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MainService} from "../../core-module/services/main.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-employee',
@@ -16,11 +17,10 @@ export class NewEmployeeComponent implements OnInit {
   sex = ['Kobieta', 'Mężczyzna'];
   CV_file = '';
 
-  constructor(private dialogref: MatDialogRef<NewEmployeeComponent>,
-              @Inject(MAT_DIALOG_DATA) private data,
-              private formbuilder: FormBuilder,
+  constructor(private formbuilder: FormBuilder,
               private mainservice: MainService,
-              private snack: MatSnackBar) { }
+              private snack: MatSnackBar,
+              private router: Router) { }
 
   ngOnInit() {
     this.BuildForm();
@@ -55,7 +55,6 @@ export class NewEmployeeComponent implements OnInit {
     console.log(this.CV_file);
     this.mainservice.addEmployee(this.form.value).then(()=> {
       this.snack.open('Pomyślnie dodano pracownika!', '', {duration: 3000, panelClass: 'succes_snack'});
-      this.dialogref.close();
     });
   }
 
@@ -63,12 +62,16 @@ export class NewEmployeeComponent implements OnInit {
 
   closeIt(): void {
     this.form.reset();
-    this.dialogref.close();
+    this.router.navigate(['employees']);
+
   }
   CVFile(fileInputEvent: any): void {
     console.log(fileInputEvent.target.files[0]);
     this.CV_file = fileInputEvent.target.files[0];
 
+  }
+  mainImgChange(file: any): void {
+    console.log(file.target.files[0]);
   }
 
 }

@@ -1,33 +1,43 @@
 @import "../assets/styles/global";
 #top-navbar {
-  z-index: 10;
+  z-index: 3;
 }
 
-#sidebar {
-.relative;
+.sidebar {
+.fixed;
   .w(0);
  .d-inline;
-  z-index: 5;
   left: -220px;
   overflow: hidden;
   .custom-transition(0.3s all linear);
   @media @small {
     left: 0;
+    top: 0;
     .w(220px);
   }
-
 }
-#right_app {
+.hidden_sidebar {
+  .w(50px);
+  .custom-transition(0.3s all linear);
+}
+.right_app {
   .w(100%);
   vertical-align: top;
   .d-inline;
   .relative;
   left: 0;
-
   .custom-transition(0.3s all linear);
   @media @small {
     .w-calc(100%, 220px);
-
-
+    left: 220px;
   }
 }
+#footer {
+  z-index: 99 !important;
+}
+.hidden_right {
+  .w-calc(100%, 50px);
+  left: 50px;
+  .custom-transition(0.3s all linear);
+}
+
