@@ -32,7 +32,6 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
     AngularFireModule.initializeApp(environment.firebase),
     MaterialModule,
     AngularFireDatabaseModule,
-    MatFileUploadModule,
     NgxChartsModule
 
   ],

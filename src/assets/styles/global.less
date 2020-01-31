@@ -210,6 +210,9 @@ body {
 .dashboard_header {
   .relative;
   padding-left: 15px;
+  &:first-letter {
+    //color: @main_color;
+  }
   &:before {
     .absolute;
     left: 0;
@@ -217,9 +220,17 @@ body {
     content: '';
     width: 10px;
     height: 100%;
-    background-color: @bg_color;
+    background-color: @main_color;
   }
 }
 
+.table_header {
 
+  div {
+    color: @bg_color;
+  }
+  th {
+    z-index: 1 !important;
+  }
+}
 

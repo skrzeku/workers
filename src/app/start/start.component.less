@@ -8,3 +8,58 @@
     color: red;
   }
 }
+::ng-deep .advanced-pie-legend {
+  .w(100%) !important;
+  top: 0 !important;
+  transform: translate(0, 0) !important;
+  .total-value, .total-label{
+    display: none;
+  }
+}
+::ng-deep .advanced-pie-legend-wrapper, ::ng-deep .advanced-pie.chart {
+  .w(100%) !important;
+.d-block !important;
+}
+::ng-deep .ngx-charts {
+  //height: 200px;
+}
+
+
+
+// just for test
+
+.mybord {
+  border: solid 1px red;
+}
+.charts_wrapper {
+  .w(90%);
+  margin: 20px auto 0;
+  height: 350px;
+}
+
+.icon_div {
+  margin-right: 20px;
+  .d-inline;
+  color: @bg_color;
+  i {
+    font-size: 45px;
+  }
+
+}
+.icon_info {
+  .d-inline;
+  color: @bg_color;
+  vertical-align: top;
+  line-height: 1;
+  div {
+    &:first-child {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    &:last-child {
+      font-size: .8rem;
+      opacity: .8;
+    }
+  }
+
+}

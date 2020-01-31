@@ -1,122 +1,143 @@
 <div class="start_header">
   <h5><i class="fas fa-home"></i>Przegląd</h5>
 </div>
-<div class="container-fluid">
+<div class="container-fluid overflow-hidden">
   <div class="row">
-    <h4 id="first">lol</h4>
 
-    <!-- Absences-->
-    <div class="col-6">
-      <div class="row">
-        <div class="col-12">
-          Logo Firmy - Kadry i płace
-        </div>
-        <div class="col-12">
-          Wszyscy pracownicy: {{employees?.length}}
-        </div>
-        <div class="col-12">
-          <ngx-charts-bar-vertical
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="single"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            (select)="onSelect($event)">
-          </ngx-charts-bar-vertical>
-        </div>
+
+    <div class="col-12 col-lg-6 p-3">
+      <h5 class="dashboard_header">Pracownicy</h5>
+      <div class="icon_div"><i class="fas fa-users"></i></div>
+      <div class="icon_info"><div>15</div><div>Łączna liczba pracowników</div></div>
+      <div class="charts_wrapper">
+        <ngx-charts-bar-vertical
+          [view]="workersview"
+          [scheme]="workerscolors"
+          [results]="workersresults"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          >
+        </ngx-charts-bar-vertical>
       </div>
-
     </div>
     <!-- Education-->
-    <div class="col-6">
+    <div class="col-12 col-lg-6 p-3">
       <h5 class="dashboard_header">Wykształcenie</h5>
-            <div id="education_chart">
+      <div class="icon_div"><i class="fas fa-user-graduate"></i></div>
+      <div class="icon_info"><div>Średnie</div><div> Najczęstszy poziom wykształcenia</div></div>
+            <div class="charts_wrapper">
               <ngx-charts-advanced-pie-chart
-                [view]="view"
-                [scheme]="colorScheme"
+                [view]="educationview"
+                [scheme]="workerscolors"
                 [results]="single"
-                [gradient]="gradient"
-                (select)="onSelect($event)"
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)"
               >
               </ngx-charts-advanced-pie-chart>
             </div>
     </div>
     <!-- Absences-->
-    <div class="col-6">
+    <div class="col-12 col-lg-6 p-3">
       <h5 class="dashboard_header">Absencje</h5>
       <div class="row">
-        <div class="col-6">
-          <i class="fas fa-user-times"></i>
-          <span>5.3 dni</span>
-          <div><ngx-charts-pie-grid
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="single"
-            (select)="onSelect($event)">
-          </ngx-charts-pie-grid></div>
+        <div class="col-12">
+          <div class="icon_div"><i class="fas fa-user-times"></i></div>
+          <div class="icon_info"><div>5.3 dni</div><div> Średnia miesięczna absencja</div></div>
         </div>
-        <div class="col-6">
-          <ngx-charts-line-chart
-            [view]="view"
-            [scheme]="colorScheme"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxis]="xAxis"
-            [yAxis]="yAxis"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [results]="multi"
-            (select)="onSelect($event)"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)"
-          >
-          </ngx-charts-line-chart>
+        <div class="col-12">
+          <div class="charts_wrapper">
+            <ngx-charts-line-chart
+              [view]="workersview"
+              [scheme]="workerscolors"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxis]="xAxis"
+              [yAxis]="yAxis"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [timeline]="timeline"
+              [results]="multi"
+            >
+            </ngx-charts-line-chart>
+          </div>
+
+        </div>
+        <div class="col-12">
+          <div class="icon_div"><i class="fas fa-user-times"></i></div>
+          <div class="icon_info"><div>76</div><div> Liczba absencji Styczeń 2020</div></div>
+        </div>
+        <div class="col-12">
+          <div class="charts_wrapper">
+            <ngx-charts-bar-horizontal
+              [view]="workersview"
+              [scheme]="workerscolors"
+              [results]="horizontal"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+
+              >
+            </ngx-charts-bar-horizontal>
+            <!--
+            <ngx-charts-pie-grid
+              [view]="workersview"
+              [scheme]="workerscolors"
+              [results]="workersresults"
+              label="Absencji"
+            >
+            </ngx-charts-pie-grid> -->
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Salaries-->
-    <div class="col-6">
+    <div class="col-12 col-lg-6 p-3">
       <h5 class="dashboard_header">Wynagrodzenia</h5>
       <div class="row">
-        <div class="col-6">
-          <i class="fas fa-coins"></i> <span>43,500 zł średnie miesięczne wynagrodzenie</span>
-          <div><ngx-charts-number-card
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="single"
-            [cardColor]="cardColor"
-            (select)="onSelect($event)">
-          </ngx-charts-number-card></div>
+        <div class="col-12">
+          <div class="icon_div"><i class="fas fa-coins"></i></div>
+          <div class="icon_info"><div>4500 zł</div><div> Średnie miesięczne wynagrodzenie</div></div>
+
         </div>
-        <div class="col-6">
-          <ngx-charts-bar-horizontal
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="single"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            (select)="onSelect($event)"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)">
-          </ngx-charts-bar-horizontal>
+        <div class="col-12">
+          <div class="charts_wrapper">
+            <ngx-charts-line-chart
+              [view]="workersview"
+              [scheme]="workerscolors"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxis]="xAxis"
+              [yAxis]="yAxis"
+              [xAxisLabel]="xAxisLabel"
+              yAxisLabel="Wynagrodzenie"
+              [timeline]="timeline"
+              [results]="multis"
+            >
+            </ngx-charts-line-chart>
+          </div>
+
         </div>
-      </div>
+        <div class="col-12">
+          <div class="icon_div"><i class="fas fa-coins"></i></div>
+          <div class="icon_info"><div>370000 zł</div><div> Koszty wynagrodzeń Styczeń 2020</div></div>
+        </div>
+        <div class="col-12">
+          <div class="charts_wrapper">
+            <ngx-charts-bar-vertical
+              [view]="workersview"
+              [scheme]="workerscolors"
+              [results]="workersresults"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+            >
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
     </div>
 
   </div>

@@ -11,5 +11,8 @@ export class BottomComponent implements OnInit {
 
   ngOnInit() {
   }
+  openLink(eny: any): void {
+    console.log(eny);
+  }
 
 }

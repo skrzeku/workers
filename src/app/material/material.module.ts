@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatAutocompleteModule, MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef,
+  MatAutocompleteModule, MatBottomSheetModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -21,7 +21,7 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 
-import { MatFileUploadModule } from 'angular-material-fileupload';
+
 import {FormsModule} from "@angular/forms";
 
 
@@ -55,7 +55,6 @@ const Materials = [
   MatTooltipModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatFileUploadModule,
   MatPaginatorModule,
   FormsModule,
   MatBottomSheetModule

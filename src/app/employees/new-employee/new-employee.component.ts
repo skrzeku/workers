@@ -15,7 +15,7 @@ export class NewEmployeeComponent implements OnInit {
   departments = ['IT', 'Księgowość', 'Administracja', 'Ochrona', 'Pracownik Produkcji'];
   educations = ['Podstawowe', 'Gimnazjalne', 'Zawodowe', 'Średnie', 'Wyższe'];
   sex = ['Kobieta', 'Mężczyzna'];
-  CV_file = '';
+  CV_file: File;
 
   constructor(private formbuilder: FormBuilder,
               private mainservice: MainService,

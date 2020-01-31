@@ -32,8 +32,8 @@ table {
   top: 50%;
   transform: translateY(-50%);
   .fixed;
-  padding-top: 10px;
   opacity: 0;
+  padding: 20px;
   height: auto;
   z-index: -1;
   background-color: white;
@@ -41,6 +41,13 @@ table {
  box-shadow:  0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
   @media @medium {
     //top: 45px;
+  }
+  h6 {
+    margin-top: 20px;
+    i {
+      font-size: 20px;
+      margin-right: 10px;
+    }
   }
 
   .fa-times {
@@ -58,7 +65,7 @@ table {
   right: 0;
   opacity: 1;
   .custom-transition(0.3s all ease);
-  z-index: 1;
+  z-index: 10;
 
   @media @medium {
     right: 5%;
@@ -79,8 +86,8 @@ table {
   width: 40%;
 }
 .employee_img {
-  text-align: right;
   padding-right: 0;
+  .center-text;
   img {
     width: 80%;
     height: auto;
@@ -88,12 +95,12 @@ table {
 }
 
 #action_wrapper {
-  .center-text;
   padding-bottom: 15px;
   i {
-    font-size: 25px;
+    font-size: 30px;
     margin-right: 15px;
     .c-pointer;
+    color: @bg_color;
   }
 
 }
@@ -113,4 +120,12 @@ table {
   .w(60%);
   height: 100px;
   margin: 0 auto;
+}
+.personal_data {
+  font-size: .95rem;
+span {
+  font-weight: bold;
+  color: @bg_color;
+
+}
 }

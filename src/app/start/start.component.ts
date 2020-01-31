@@ -9,6 +9,26 @@ import {MainService} from "../core-module/services/main.service";
 })
 export class StartComponent implements OnInit {
   employees: Employee[];
+  workersresults: any[] = [{
+    "name": "IT",
+    "value": 2
+  },
+    {
+      "name": "Księgowość",
+      "value": 4
+    },
+    {
+      "name": "Ochrona",
+      "value": 3
+    },
+    {
+      "name": "Produkcja",
+      "value": 8
+    },
+    {
+      "name": "Administracja",
+      "value": 3
+    }];
 
   single: any[] = [  {
     "name": "Podstawowe",
@@ -81,23 +101,100 @@ export class StartComponent implements OnInit {
       },
     ]
   }];
-  view: any[] = [400, 300];
+  multis: any[] = [
+    {
+      "name": "Germany",
+      "series": [
+        {
+          "name": "01/2019",
+          "value": 6.1
+        },
+        {
+          "name": "02/2019",
+          "value": 6.4
+        },
+        {
+          "name": "03/2019",
+          "value": 5.9
+        },
+        {
+          "name": "04/2019",
+          "value": 5.2
+        },
+        {
+          "name": "05/2019",
+          "value": 6.5
+        },
+        {
+          "name": "06/2019",
+          "value": 6.7
+        },
+        {
+          "name": "07/2019",
+          "value": 11.2
+        }, {
+          "name": "08/2019",
+          "value": 14.3
+        }, {
+          "name": "09/2019",
+          "value": 10.5
+        }, {
+          "name": "10/2019",
+          "value": 3.2
+        }, {
+          "name": "11/2019",
+          "value": 2.5
+        }, {
+          "name": "12/2019",
+          "value": 5.6
+        }, {
+          "name": "01/2020",
+          "value": 6.2
+        }]}
+  ];
+  horizontal: any[] = [  {
+    "name": "IT",
+    "value": 6
+  },
+    {
+      "name": "Księgowość",
+      "value": 5
+    },
+    {
+      "name": "Administracja",
+      "value": 5
+    },
+    {
+      "name": "Ochrona",
+      "value": 10
+    },
+    {
+      "name": "Produkcja",
+      "value": 14
+    }];
+  view: any[] = [500, 300];
+  workersview: any[];
+  educationview: any[] = [550, 200];
   gradient: boolean = false;
   colorScheme = {
     domain: ['blue', '#A10A28', '#C7B42C', '#AAAAAA', 'red']
+  };
+  workerscolors = {
+    domain: ['#001730', '#4ad7d1']
   };
 
   // options
   showXAxis = true;
   showYAxis = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Dział';
+  xAxisLabel = 'Data';
   showYAxisLabel = true;
-  yAxisLabel = 'Pracownicy';
-  timeline: boolean = true;
+  yAxisLabel = 'Liczba Dni';
+  timeline: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
   showLegend: boolean = true;
+
 
 
   constructor(private mainservice: MainService) { }
