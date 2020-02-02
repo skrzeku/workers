@@ -48,6 +48,9 @@ body {
   .center-text {
     text-align: center;
   }
+  .font-bold {
+    font-weight: bold;
+  }
 
 
   //another
@@ -160,11 +163,12 @@ body {
 }
 
 .example-container {
-  height: 400px;
+  height: 300px;
   overflow: auto;
-  .w(90%);
+  .w(100%);
   @media @medium {
     .w(80%);
+    height: 400px;
     margin: 20px auto;
   }
 }
@@ -183,7 +187,7 @@ body {
   }
 }
 .primary {
-  border: @bg_color solid 1px;
+  border: @main_color solid 1px;
   background-color: @bg_color;
   color: @natural_color;
   &:hover {
@@ -210,6 +214,7 @@ body {
 .dashboard_header {
   .relative;
   padding-left: 15px;
+  color: @bg_color;
   &:first-letter {
     //color: @main_color;
   }
@@ -225,9 +230,10 @@ body {
 }
 
 .table_header {
-
+  background-color: @bg_color;
   div {
-    color: @bg_color;
+    color: @main_color;
+
   }
   th {
     z-index: 1 !important;

@@ -26,27 +26,34 @@ table {
     background-color: gray;
   }
 }
+
 .right_employees_inside {
 
   right: -300px;
-  top: 50%;
-  transform: translateY(-50%);
-  .fixed;
+  .absolute;
   opacity: 0;
   padding: 20px;
+  .w(90%);
   height: auto;
   z-index: -1;
   background-color: white;
   .custom-transition(0.3s all ease-out);
  box-shadow:  0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
   @media @medium {
-    //top: 45px;
+    .w(60%);
+    .fixed;
+    top: 50%;
+    transform: translateY(-50%);
   }
+
   h6 {
-    margin-top: 20px;
+    margin-top: 10px;
+    @media @medium {  margin-top: 20px;}
     i {
       font-size: 20px;
       margin-right: 10px;
+      color: @main_color;
+
     }
   }
 
@@ -62,16 +69,17 @@ table {
   }
 }
 .right_shown {
-  right: 0;
+  right: 5%;
   opacity: 1;
   .custom-transition(0.3s all ease);
   z-index: 10;
 
   @media @medium {
-    right: 5%;
+    right: 20%;
 
   }
 }
+
 #employee_table {
   .w(100%);
   margin-top: 10px;
@@ -89,8 +97,20 @@ table {
   padding-right: 0;
   .center-text;
   img {
-    width: 80%;
+    .w(50%);
     height: auto;
+    @media @medium { .w(80%) }
+  }
+  div {
+    font-size: .85rem;
+    @media @medium { font-size: .95rem;}
+    &:first-of-type {
+      .font-bold;
+      color: @bg_color;
+    }
+    &:last-of-type {
+      opacity: .8;
+    }
   }
 }
 
@@ -101,8 +121,22 @@ table {
     margin-right: 15px;
     .c-pointer;
     color: @bg_color;
+    &:hover {
+      color: @main_color;
+    }
   }
 
+}
+#attachments {
+  a {
+    margin-right: 10px;
+    font-size: .9rem;
+    .font-bold;
+    .c-pointer;
+    &:hover {
+      color: @main_color;
+    }
+  }
 }
 .advanced_filters {
   .center-text;
@@ -122,10 +156,12 @@ table {
   margin: 0 auto;
 }
 .personal_data {
-  font-size: .95rem;
+  font-size: .85rem;
+  @media @medium {
+    font-size: .95rem;
+  }
 span {
   font-weight: bold;
   color: @bg_color;
-
 }
 }

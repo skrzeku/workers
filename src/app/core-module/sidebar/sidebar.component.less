@@ -62,6 +62,7 @@
   -webkit-box-shadow: 2px -1px 0 @main_color inset;
   box-shadow: 2px -1px 0 @main_color inset;
   border-bottom-left-radius: 5px;
+  background-color: @bg_color !important;
  a {
    color: @natural_color !important;
  }
@@ -69,7 +70,7 @@
 .nav_item {
   padding: 12px 0;
   .c-pointer;
-  .custom-transition(0.3s all ease);
+  //.custom-transition(0.1s all ease);
   outline: 0;
   a {
     color: white;
@@ -80,9 +81,10 @@
 
   }
   &:hover {
+    background-color: @natural_color;
     a {
       text-decoration: none;
-      color: @main_color;
+      color: @bg_color;
     }
   }
 

@@ -180,7 +180,7 @@ export class StartComponent implements OnInit {
     domain: ['blue', '#A10A28', '#C7B42C', '#AAAAAA', 'red']
   };
   workerscolors = {
-    domain: ['#001730', '#4ad7d1']
+    domain: ['#111111', '#2DBB54']
   };
 
   // options

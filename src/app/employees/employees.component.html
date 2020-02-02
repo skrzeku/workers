@@ -116,14 +116,14 @@
 
       <div class="right_employees_inside" [ngClass]="{'right_shown': showright}">
         <div class="row">
-          <div class="col-4 employee_img">
+          <div class=" col-12 col-sm-4 employee_img">
             <img src="../../assets/images/Unknown.jpeg">
-            <div>{{employee?.last_name}}</div>  <!-- full_nem-->
+            <div class="mt-1 mt-md-3">{{employee?.last_name}}</div>  <!-- full_nem-->
             <div>{{employee?.position}}</div>
           </div>
-          <div class="col-8">
+          <div class="col-12 col-sm-8">
            <div class="row">
-             <div class="col-6 personal_data">
+             <div class="col-12 col-sm-6 personal_data">
                <h6><i class="far fa-user"></i>Dane Personalne:</h6>
                <div><span>Imię:</span> {{employee?.first_name}}</div>
                <div><span>Nazwisko: </span>{{employee?.last_name}}</div>
@@ -136,7 +136,7 @@
                <div><span>Telefon:</span> {{employee?.phone}}</div>
 
              </div>
-             <div class="col-6 personal_data">
+             <div class="col-12 col-sm-6 personal_data">
                <h6><i class="far fa-user"></i>Dane Organizacyjne:</h6>
                <div><span>Dział:</span> {{employee?.department}}</div>
                <div><span>Stanowisko:</span> {{employee?.position}}</div>
@@ -148,7 +148,7 @@
                <div><span>Nieobecności:</span> Obliczyć</div>
                <div><span>Pozostały urlop:</span> Obliczyć</div>
              </div>
-             <div class="col-6">
+             <div class="col-12 col-sm-6">
                <h6><i class="fas fa-tools"></i>Akcje:</h6>
                <div id="action_wrapper">
                  <i class="fas fa-at" [matTooltip]="employee?.email" [matTooltipClass]="'tool-tip'"></i>
@@ -157,9 +157,9 @@
                  <i class="fas fa-file-signature" matTooltip="Dodaj Umowę"></i>
                </div>
              </div>
-             <div class="col-6">
+             <div class="col-12 col-sm-6">
                <h6><i class="fas fa-paperclip"></i>Załączniki:</h6>
-               <div>
+               <div id="attachments">
                  <a>Umowa.pdf</a>
                  <a>Lista_plac.pdf</a>
                </div>
