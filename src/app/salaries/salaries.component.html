@@ -57,39 +57,15 @@
             <td mat-cell *matCellDef="let element"> listplac.pdf </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table_header" ></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="salaries_row" (click)="selectIt(row, $event)" #rows></tr>
         </table>
       </div>
-    </div>
-
-
-    <div class="col-12 headers_section"><h3>Podsumowanie</h3></div>
-    <div class="col-12 offset-md-2 col-md-8 mt-5">
-      <div class="row">
-        <div class="col-6">
-          <h5 class="center-text">Suma pracowników:</h5>
-          <pre>Ogółem: {{employees?.length}}</pre>
-          <pre>IT: {{dep_emps[0]?.length}}</pre>
-          <pre>Księgowość: {{dep_emps[1]?.length}}</pre>
-          <pre>Administracja: {{dep_emps[2]?.length}}</pre>
-          <pre>Ochrona: {{dep_emps[3]?.length}}</pre>
-          <pre>Produkcja: {{dep_emps[4]?.length}}</pre>
-        </div>
-        <div class="col-6">
-          <h5 class="center-text">Srednie wynagrodzenie:</h5>
-          <pre>Ogółem: {{avarage}} PLN</pre>
-          <pre>IT: {{salaries_arr[0]}} PLN</pre>
-          <pre>Księgowość: {{salaries_arr[1]}} PLN</pre>
-          <pre>Administracja: {{salaries_arr[2]}} PLN</pre>
-          <pre>Ochrona: {{salaries_arr[3]}} PLN</pre>
-          <pre>Produkcja: {{salaries_arr[4]}} PLN</pre>
-        </div>
-
+      <div class="some_buttons">
+        <button class="main_button primary" mat-raised-button [disabled]="!employee">Zobacz umowę</button>
+        <button class="main_button warning" mat-raised-button [disabled]="!employee">Generuj Listę płac</button>
       </div>
     </div>
 
-
-  </div>
 </div>
 

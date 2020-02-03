@@ -1,11 +1,16 @@
-<div class="col-12"><h4>Pracownik: {{employee?.first_name}} {{employee?.last_name}}<i class="fas fa-times" (click)="close()"></i></h4></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12"><h4>Pracownik: {{employee?.first_name}} {{employee?.last_name}}<i class="fas fa-times" (click)="close()"></i></h4></div>
 
-  <div>Pracownik posiada obecnie umowę do: </div>
-  <div>Pracownik nie posiada obecnie umowy! </div>   <!--nalezy ją dodać -->
+    <div>Pracownik posiada obecnie umowę do: </div>
+    <div>Pracownik nie posiada obecnie umowy! </div>   <!--nalezy ją dodać -->
 
 
-  <div class="some_buttons">
-  <button mat-raised-button (click)="GotoNewContract(employee)">Dodaj</button>
-  <button mat-raised-button (click)="GotoNewContract(employee)">Edytuj</button>  <!-- ngIf show one-->
+    <div class="some_buttons col-12 pb-1">
+      <button mat-raised-button (click)="GotoNewContract(employee)" class="main_button primary">Dodaj</button>
+      <button mat-raised-button (click)="GotoNewContract(employee)" class="main_button warning">Edytuj</button>  <!-- ngIf show one-->
+    </div>
+
   </div>
+</div>
 

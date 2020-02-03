@@ -2,10 +2,41 @@ import { Component, OnInit } from '@angular/core';
 import {Employee} from "../core-module/models/employee";
 import {MainService} from "../core-module/services/main.service";
 
+import {FormControl} from "@angular/forms";
+import * as _moment from "moment";
+import {Moment} from "moment";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepicker} from "@angular/material";
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/material-moment-adapter";
+const moment =  _moment;
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
+
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.less']
+  styleUrls: ['./start.component.less'],
+  providers: [
+    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+    // application's root module. We provide it at the component level here, due to limitations of
+    // our example generation script.
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class StartComponent implements OnInit {
   employees: Employee[];
@@ -172,13 +203,12 @@ export class StartComponent implements OnInit {
       "name": "Produkcja",
       "value": 14
     }];
-  view: any[] = [500, 300];
+  months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Pażdziernik', 'Listopad', 'Grudzień'];
   workersview: any[];
   educationview: any[] = [550, 200];
   gradient: boolean = false;
-  colorScheme = {
-    domain: ['blue', '#A10A28', '#C7B42C', '#AAAAAA', 'red']
-  };
+  table_year = 2020;
+  table_month = 0;
   workerscolors = {
     domain: ['#111111', '#2DBB54']
   };
@@ -194,6 +224,9 @@ export class StartComponent implements OnInit {
   xAxis: boolean = true;
   yAxis: boolean = true;
   showLegend: boolean = true;
+  date = new FormControl(moment());
+  maxDate =  moment();
+  minDate = new Date(2019, 0, 1);
 
 
 
@@ -205,16 +238,20 @@ export class StartComponent implements OnInit {
     });
   }
 
-  onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  chosenYearHandler(normalizedYear: Moment) {
+    const ctrlValue = this.date.value;
+    ctrlValue.year(normalizedYear.year());
+    this.date.setValue(ctrlValue);
+
   }
 
-  onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+    const ctrlValue = this.date.value;
+    ctrlValue.month(normalizedMonth.month());
+    this.table_year = ctrlValue.year();
+    this.table_month = ctrlValue.month();
+    this.date.setValue(ctrlValue);
+    datepicker.close();
   }
 
 }

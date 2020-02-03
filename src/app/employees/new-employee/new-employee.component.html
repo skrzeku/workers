@@ -2,60 +2,63 @@
   <h5>Nowy pracownik</h5>
   <form [formGroup]="form">
     <div class="row">
-      <div class="col-3">
-
-
-        <input #imgInput type="file" hidden (change)="mainImgChange($event)" accept=".jpg">
-        <button mat-raised-button (click)="imgInput.click()">Dodaj zdjęcie</button>
+      <div class="col-12 col-md-3 center-text mt-3">
+        <div id="add_img_wrapper"> <!-- *ng IF img-->
+          <input #imgInput type="file" hidden (change)="mainImgChange($event)" accept=".jpg">
+          <button mat-raised-button (click)="imgInput.click()" class="main_button primary">Dodaj zdjęcie</button>
+        </div>
+        <div id="add_when_img">s</div> <!-- add background img by ngClass-->
 
       </div>
-      <div class="col-9">
-        <div class="row">
-            <div class="col-4">
+      <div class="col-12 col-md-9 mt-3">
+
+
+        <div class="row form_row">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <input matInput type="number" placeholder="Numer Pracowniczy" formControlName="id">
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Imie" formControlName="first_name">
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Nazwisko"  formControlName="last_name">
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field>
                 <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" formControlName="birthday">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <input matInput type="number" placeholder="Pesel" formControlName="pesel">
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <input matInput type="email" placeholder="Email" formControlName="email">
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <mat-select formControlName="department" placeholder="Dział">
                   <mat-option *ngFor="let depart of departments" [value]="depart">{{depart}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Stanowisko" formControlName="position">
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <mat-select formControlName="sex" placeholder="Płec">
                   <mat-option *ngFor="let se of sex" [value]="se">{{se}}</mat-option>
@@ -63,14 +66,14 @@
               </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <mat-select formControlName="education" placeholder="Wykształcenie">
                   <mat-option *ngFor="let educ of educations" [value]="educ">{{educ}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <mat-select formControlName="experience_all" placeholder="Dotychczasowe doświadczenie">
                   <mat-option value='1'>1 rok</mat-option>
@@ -79,10 +82,11 @@
                   <mat-option value='4'>4 lata</mat-option>
                   <mat-option value='5'>5 lat</mat-option>
                   <mat-option value="6">6 lat</mat-option>
-                </mat-select>
+                </mat-select>form
               </mat-form-field>
             </div>
-            <div class="col-4">
+
+            <div class="col-6 col-sm-4">
               <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="CVFile($event)" accept=".pdf" formControlName="CV"/>
               <button mat-flat-button color="primary" (click)="csvInput.click()" class="main_button primary">Dodaj CV</button>
               <div id="small_cv">{{CV_file?.name}}</div>
@@ -98,7 +102,6 @@
     <button mat-raised-button (click)="form.reset()" class="main_button warning">Wyczysc</button>
     <button mat-raised-button (click)="closeIt()" class="main_button warning">Anuluj</button>
     <button mat-raised-button (click)="Add_Employee()" [disabled]="form.invalid" class="main_button success">Dodaj +</button>
-      <button class="btn"><span>Hover me!</span></button>
   </div>
 
 

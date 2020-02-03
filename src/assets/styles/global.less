@@ -41,6 +41,9 @@ body {
   .over-hidden {
     overflow: hidden;
   }
+  .float-right {
+    float: right;
+  }
 
 
   //text
@@ -150,15 +153,18 @@ body {
     .w(80%);
   }
   mat-form-field {
-    max-width: 100px;
+    max-width: 75px;
+    font-size: .9rem;
     margin-left: 20px;
     @media @small {
       max-width: 150px;
     }
   }
   form {
-    .d-inline;
     margin-right: 20px;
+    @media @small {
+      .d-inline;
+    }
   }
 }
 
@@ -166,7 +172,17 @@ body {
   height: 300px;
   overflow: auto;
   .w(100%);
+  table {
+    .w(100%);
+  }
+    .mat-cell {
+      font-size: .7rem;
+    }
+
   @media @medium {
+    .mat-cell {
+      font-size: .95rem;
+    }
     .w(80%);
     height: 400px;
     margin: 20px auto;
@@ -202,6 +218,7 @@ body {
   &:hover {
     background-color: @bg_color;
     color: @natural_color;
+    border-color: @main_color;
   }
 }
 .some_buttons {
@@ -215,9 +232,8 @@ body {
   .relative;
   padding-left: 15px;
   color: @bg_color;
-  &:first-letter {
-    //color: @main_color;
-  }
+  font-family: 'Palanquin', sans-serif;
+  .font-bold;
   &:before {
     .absolute;
     left: 0;
@@ -233,10 +249,28 @@ body {
   background-color: @bg_color;
   div {
     color: @main_color;
-
   }
   th {
     z-index: 1 !important;
+    color: @main_color;
+  }
+}
+.fa-times {
+  .absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  .c-pointer;
+  color: @bg_color;
+  z-index: 5;
+  &:hover {
+    opacity: .8;
+  }
+}
+.selected_row {
+  background-color: @bg_color !important;
+  .mat-cell {
+    color: @natural_color !important;
   }
 }
 

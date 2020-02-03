@@ -1,12 +1,12 @@
 <div class="start_header">
   <h5><i class="fas fa-home"></i>Przegląd</h5>
 </div>
-<div class="container-fluid overflow-hidden">
+<div class="container-fluid overflow-hidden p-2 p-md-3">
   <div class="row">
 
 
     <div class="col-12 col-lg-6 p-3">
-      <h5 class="dashboard_header">Pracownicy</h5>
+      <h4 class="dashboard_header">Pracownicy</h4>
       <div class="icon_div"><i class="fas fa-users"></i></div>
       <div class="icon_info"><div>15</div><div>Łączna liczba pracowników</div></div>
       <div class="charts_wrapper">
@@ -24,7 +24,7 @@
     </div>
     <!-- Education-->
     <div class="col-12 col-lg-6 p-3">
-      <h5 class="dashboard_header">Wykształcenie</h5>
+      <h4 class="dashboard_header">Wykształcenie</h4>
       <div class="icon_div"><i class="fas fa-user-graduate"></i></div>
       <div class="icon_info"><div>Średnie</div><div> Najczęstszy poziom wykształcenia</div></div>
             <div class="charts_wrapper">
@@ -38,7 +38,7 @@
     </div>
     <!-- Absences-->
     <div class="col-12 col-lg-6 p-3">
-      <h5 class="dashboard_header">Absencje</h5>
+      <h4 class="dashboard_header">Absencje</h4>
       <div class="row">
         <div class="col-12">
           <div class="icon_div"><i class="fas fa-user-times"></i></div>
@@ -62,40 +62,12 @@
           </div>
 
         </div>
-        <div class="col-12">
-          <div class="icon_div"><i class="fas fa-user-times"></i></div>
-          <div class="icon_info"><div>76</div><div> Liczba absencji Styczeń 2020</div></div>
-        </div>
-        <div class="col-12">
-          <div class="charts_wrapper">
-            <ngx-charts-bar-horizontal
-              [view]="workersview"
-              [scheme]="workerscolors"
-              [results]="horizontal"
-              [gradient]="gradient"
-              [xAxis]="showXAxis"
-              [yAxis]="showYAxis"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-
-              >
-            </ngx-charts-bar-horizontal>
-            <!--
-            <ngx-charts-pie-grid
-              [view]="workersview"
-              [scheme]="workerscolors"
-              [results]="workersresults"
-              label="Absencji"
-            >
-            </ngx-charts-pie-grid> -->
-          </div>
-        </div>
       </div>
     </div>
 
     <!-- Salaries-->
     <div class="col-12 col-lg-6 p-3">
-      <h5 class="dashboard_header">Wynagrodzenia</h5>
+      <h4 class="dashboard_header">Wynagrodzenia</h4>
       <div class="row">
         <div class="col-12">
           <div class="icon_div"><i class="fas fa-coins"></i></div>
@@ -118,27 +90,63 @@
             >
             </ngx-charts-line-chart>
           </div>
-
-        </div>
-        <div class="col-12">
-          <div class="icon_div"><i class="fas fa-coins"></i></div>
-          <div class="icon_info"><div>370000 zł</div><div> Koszty wynagrodzeń Styczeń 2020</div></div>
-        </div>
-        <div class="col-12">
-          <div class="charts_wrapper">
-            <ngx-charts-bar-vertical
-              [view]="workersview"
-              [scheme]="workerscolors"
-              [results]="workersresults"
-              [xAxis]="showXAxis"
-              [yAxis]="showYAxis"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-            >
-            </ngx-charts-bar-vertical>
-          </div>
         </div>
     </div>
+  </div> <!-- End salaries-->
 
-  </div>
+        <!-- Month summary-->
+
+    <div class="col-12 center-text m-3">
+      <div class="pr-3"><span class="dashboard_header">{{months[table_month]}} {{table_year}}</span><span id="header_form_field"><mat-form-field>
+        <input matInput [max]="maxDate" [min]="minDate" [matDatepicker]="dp" placeholder="Okres:" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp
+                        startView="multi-year"
+                        (yearSelected)="chosenYearHandler($event)"
+                        (monthSelected)="chosenMonthHandler($event, dp)"
+                        panelClass="example-month-picker">
+        </mat-datepicker>
+      </mat-form-field></span></div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="icon_div"><i class="fas fa-user-times"></i></div>
+      <div class="icon_info"><div>76</div><div> Liczba absencji Styczeń 2020</div></div>
+      <div class="charts_wrapper">
+        <ngx-charts-bar-horizontal
+          [view]="workersview"
+          [scheme]="workerscolors"
+          [results]="horizontal"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+        >
+        </ngx-charts-bar-horizontal>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="icon_div"><i class="fas fa-coins"></i></div>
+      <div class="icon_info"><div>370000 zł</div><div> Koszty wynagrodzeń Styczeń 2020</div></div>
+      <div class="charts_wrapper">
+        <ngx-charts-bar-vertical
+          [view]="workersview"
+          [scheme]="workerscolors"
+          [results]="workersresults"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+        >
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+
+
+
+
+
+
+
+</div>
 </div>

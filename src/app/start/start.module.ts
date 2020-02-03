@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StartComponent } from './start.component';
 import {MaterialModule} from "../material/material.module";
-import {MatButtonModule} from "@angular/material";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -13,7 +13,8 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
   imports: [
     CommonModule,
     MaterialModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ReactiveFormsModule
   ],
   exports: [StartComponent]
 })

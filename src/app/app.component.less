@@ -4,13 +4,14 @@
 }
 
 .sidebar {
-.fixed;
   .w(0);
  .d-inline;
-  left: -220px;
+  .fixed;
   overflow: hidden;
+  z-index: 11;
   .custom-transition(0.3s all linear);
   @media @medium {
+    .fixed;
     left: 0;
     top: 0;
     .w(220px);

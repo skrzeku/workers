@@ -3,13 +3,7 @@
 
 table {
   .w(100%);
-  td {
-    border-right: solid 1px gray !important;
-    .center-text;
-  }
-  th {
-    .center-text;
-  }
+
 
 }
 
@@ -28,5 +22,13 @@ table {
   mat-form-field {
     .w(90%);
   }
+}
+.mycell {
+  .center-text;
+  .c-pointer;
+ &:hover {
+   background-color: @bg_color;
+   color: @main_color;
+ }
 }
 

@@ -31,18 +31,7 @@ export const MY_FORMATS = {
   },
 };
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {name: 'Hydrogen', days: [{what: 'w'}]},
-  {name: 'Helium',  days: [{what: 'w'}]},
-  {name: 'Lithium',  days: [{what: 'w'}]},
-  {name: 'Beryllium',  days: [{what: 'w'}]},
-  {name: 'Boron', days: [{what: 'w'}]},
-  {name: 'Carbon',  days: [{what: 'w'}]},
-  {name: 'Nitrogen', days: [{what: 'w'}]},
-  {name: 'Oxygen',  days: [{what: 'w'}]},
-  {name: 'Fluorine',  days: [{what: 'w'}]},
-  {name: 'Neon',  days: [{what: 'w'}]},
-];
+
 
 
 @Component({
@@ -90,35 +79,6 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
 
   //charts
   view: any[] = [400, 300];
-  single: any[] = [{
-    "name": "Ogółem",
-    "value": 48
-  },
-    {
-      "name": "IT",
-      "value": 8
-    },
-    {
-      "name": "Księgowość",
-      "value": 10
-    },
-    {
-      "name": "UK",
-      "value": 13
-    },
-    {
-      "name": "Italy",
-      "value": 14
-    },
-    {
-      "name": "Spain",
-      "value": 8
-    }];
-
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
-  };
-  cardColor: string = '#232837';
 
 
 
@@ -159,7 +119,6 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
     console.log(ctrlValue.month());
     this.table_year = ctrlValue.year();
     this.table_month = ctrlValue.month();
-
     this.date.setValue(ctrlValue);
     datepicker.close();
   }
