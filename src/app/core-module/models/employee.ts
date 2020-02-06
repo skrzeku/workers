@@ -12,6 +12,7 @@ export interface Employee {
   contract_period: number,
   contract_end: number,
   CV: any,
+  termination: number,
   experience_all: number,
   experience_here: number,
   key: string,
@@ -22,6 +23,8 @@ export interface Employee {
   phone: string,
   age: number,
   schedule: [{
+    month: number,
+    year: number,
     day: number,
     what: string
   }]

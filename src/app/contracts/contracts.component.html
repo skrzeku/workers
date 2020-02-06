@@ -54,7 +54,7 @@
           </ng-container>
           <ng-container matColumnDef="contract">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Umowa </th>
-            <td mat-cell *matCellDef="let element"> umowa.pdf</td>
+            <td mat-cell *matCellDef="let element" (click)="ShowContract($event, element)" class="contract_td"> umowa.pdf</td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table_header"></tr>
           <tr mat-row #rows *matRowDef="let row; columns: displayedColumns;" class="contact_row" (click)="selectIt(row, $event)" ></tr>

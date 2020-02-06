@@ -15,4 +15,5 @@ export class BottomComponent implements OnInit {
     console.log(eny);
   }
 
+
 }

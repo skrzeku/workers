@@ -9,6 +9,7 @@ import { NewContractComponent } from './new-contract/new-contract.component';
 import {RouterModule} from "@angular/router";
 import { BottomComponent } from '../core-module/bottom/bottom.component';
 import {CoreModule} from "../core-module/core.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -20,7 +21,8 @@ import {CoreModule} from "../core-module/core.module";
     ContractsRoutingModule,
     MaterialModule,
     RouterModule,
-    CoreModule
+    CoreModule,
+    ReactiveFormsModule
   ],
   entryComponents: [AddContractComponent, CancelContractComponent, BottomComponent]    //dialogs and bottoms
 })

@@ -1,16 +1,25 @@
 <div class="container-fluid relative">
   <i class="fas fa-times" (click)="close()"></i>
   <div class="row">
-    <div class="col-12"><h4>Pracownik: {{employee?.first_name}} {{employee?.last_name}}</h4></div>
-    <div class="col-4">Do końca umowy pozostalo: </div>
-    <div class="col-4">Okres wypowiedzenia wynosi: </div>
-    <div class="col-4">Ostatni dzień pracy: </div>
-    <div class="offset-2 col-8">
-      <mat-form-field>
-        <mat-label>Powód:</mat-label>
-        <input matInput>
-      </mat-form-field>
+    <div class="offset-3 col-6 offset-md-0 col-md-3 left_dialog_img" >
+      <img src="../../../assets/images/Unknown.jpeg" alt="">
     </div>
+    <div class="col-12 col-md-9">
+      <div class="row">
+        <div class="col-12"><h4 class="dashboard_header">{{employee?.first_name}} {{employee?.last_name}} hej</h4></div>
+        <div class="col-12"><h6 class="smaller_one">{{employee?.department}} {{employee?.position}}siema</h6></div>
+        <div class="col-12 col-md-4">Do końca umowy pozostalo: </div>
+        <div class="col-12 col-md-4">Okres wypowiedzenia wynosi: </div>
+        <div class="col-12 col-md-4">Ostatni dzień pracy: </div>
+        <div class="offset-2 col-8">
+          <mat-form-field>
+            <mat-label>Powód:</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  
     <div class="some_buttons pb-1 col-12">
       <button mat-raised-button (click)="close()" class="main_button warning">Anuluj</button>
       <button mat-raised-button (click)="openBottomSheet()" class="main_button primary">Wypowiedz</button>

@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <h5>Nowy pracownik</h5>
+<div class="container-fluid pt-3">
+  <h5 class="dashboard_header">Nowy pracownik</h5>
   <form [formGroup]="form">
     <div class="row">
       <div class="col-12 col-md-3 center-text mt-3">
@@ -14,11 +14,6 @@
 
 
         <div class="row form_row">
-            <div class="col-6 col-sm-4">
-              <mat-form-field class="example-full-width">
-                <input matInput type="number" placeholder="Numer Pracowniczy" formControlName="id">
-              </mat-form-field>
-            </div>
             <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Imie" formControlName="first_name">
@@ -46,6 +41,11 @@
                 <input matInput type="email" placeholder="Email" formControlName="email">
               </mat-form-field>
             </div>
+          <div class="col-6 col-sm-4">
+            <mat-form-field class="example-full-width">
+              <input matInput type="number" placeholder="Numer telefonu" formControlName="phone">
+            </mat-form-field>
+          </div>
             <div class="col-6 col-sm-4">
               <mat-form-field class="example-full-width">
                 <mat-select formControlName="department" placeholder="Dział">
@@ -82,7 +82,7 @@
                   <mat-option value='4'>4 lata</mat-option>
                   <mat-option value='5'>5 lat</mat-option>
                   <mat-option value="6">6 lat</mat-option>
-                </mat-select>form
+                </mat-select>
               </mat-form-field>
             </div>
 
@@ -99,6 +99,7 @@
     </div>
   </form>
   <div id="add_btn_wrapper" class="mb-5">
+    <button (click)="checkdates()">lol</button>
     <button mat-raised-button (click)="form.reset()" class="main_button warning">Wyczysc</button>
     <button mat-raised-button (click)="closeIt()" class="main_button warning">Anuluj</button>
     <button mat-raised-button (click)="Add_Employee()" [disabled]="form.invalid" class="main_button success">Dodaj +</button>

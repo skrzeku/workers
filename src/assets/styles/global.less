@@ -35,6 +35,10 @@ body {
     display: -moz-flex;
     display: -o-flex;
   }
+  .list-none {
+    list-style: none;
+    padding: 0;
+  }
   .fixed {
     position: fixed;
   }
@@ -226,6 +230,8 @@ body {
   .center-text;
   button {
     margin-right: 15px;
+    margin-top: 10px;
+    outline: 0 !important;
   }
 }
 .dashboard_header {
@@ -273,4 +279,16 @@ body {
     color: @natural_color !important;
   }
 }
-
+.left_dialog_img {
+  img {
+   .w(100%);
+  }
+}
+.smaller_one {
+  opacity: .8;
+  font-size: .9rem;
+}
+.color_error {
+  color: red;
+  font-weight: bold;
+}

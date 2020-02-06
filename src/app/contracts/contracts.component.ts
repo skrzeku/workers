@@ -58,4 +58,9 @@ export class ContractsComponent implements OnInit, AfterViewInit {
     this.renderer.addClass(el,'selected_row');
   }
 
+
+
+  ShowContract(event, employee: Employee):void {
+    console.log(employee);
+  }
 }

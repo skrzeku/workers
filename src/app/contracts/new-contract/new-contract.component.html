@@ -1,57 +1,69 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-3"><img src="../../../assets/images/Unknown.jpeg"></div>
-    <div class="col-9 right_info"><h5>{{employee?.full_name}}</h5>
-    <div id="employee_info">
-        <ul>
-          <li>Dział: {{employee?.position}}</li>
-          <li>Stanowisko: {{employee?.position}}</li>
-          <li>Wykształcenie: {{employee?.education}} zł</li>
-          <li>Pesel: {{employee?.pesel}}</li>
-          <li>Staż pracy: {{employee?.experience_all}}</li>
-        </ul>
-    </div>
-    </div>
-    <div class="col-12"> <!-- *NgIf employee.contract-->
-       <h5>Pracownik posiada obecnię umowę</h5>
-      <div>
-        <h6>Szczegóły umowy</h6>
-        <ul>
-          <li>Wynagrodzenie: {{employee?.salaries}}</li>
-          <li>Początek umowy: {{employee?.start_date}}</li>
-          <li>Okres umowy: {{employee?.contract_period}}</li>
-          <li>Koniec umowy: {{employee?.contract_end}}</li>
-          <li>Pozostało: ile dni?</li>
-        </ul>
-        <button mat-raised-button (click)="showform()" *ngIf="!editcontract">Zmień obecną umowę</button>
+<div class="container-fluid" id="mycont">
+  <div class="row p-2 p-md-4">
+    <div class="offset-3 col-6 offset-md-0 col-md-3"><img src="../../../assets/images/Unknown.jpeg"></div>
+    <div class="col-12 col-md-9 right_info">
+      <div class="row">
+        <div id="employee_info" class="col-12 col-md-6">
+          <h5 class="dashboard_header">Dane Personalne:</h5>
+          <ul class="list-none">
+            <li><span>Imię i nazwisko:</span> {{employee?.full_name}}</li>
+            <li><span>Dział:</span> {{employee?.position}}</li>
+            <li><span>Stanowisko:</span> {{employee?.position}}</li>
+            <li><span>Wykształcenie:</span> {{employee?.education}} zł</li>
+            <li><span>Pesel:</span> {{employee?.pesel}}</li>
+            <li><span>Staż pracy:</span> {{employee?.experience_all}}</li>
+          </ul>
+        </div>
+        <div class=" col-12 col-md-6">
+          <div>
+            <h5 class="dashboard_header">Szczegóły umowy</h5>
+            <ul class="list-none">
+              <li><span>Wynagrodzenie:</span> {{employee?.salaries}}</li>
+              <li><span>Początek umowy:</span> {{employee?.start_date}}</li>
+              <li><span>Okres umowy:</span> {{employee?.contract_period}}</li>
+              <li><span>Koniec umowy:</span> {{employee?.contract_end}}</li>
+              <li><span>Pozostało:</span> ile dni?</li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="dashboard_header">Brak umowy!</h5>
+          </div>
+
+        </div>
       </div>
     </div>
-    <div class="col-12"><h5>Nowa umowa pracownika</h5></div> <!-- *ngIf !employee.contract-->
-    <div class="col-12" *ngIf="editcontract">
-      <form>
-        <div class="row">
-          <div class="col-4">
+    <div class="col-12 center-text">
+      <button (click)="checkdates()">test button</button>
+      <button mat-raised-button (click)="showform()" *ngIf="!editcontract" class="main_button primary">Zmień obecną umowę</button>
+    </div>
+    <div class="col-12 mt-3" *ngIf="editcontract">
+      <h5 class="dashboard_header">Nowa umowa pracownika</h5>
+      Ustwaić animacje angular
+      <form [formGroup]="form">
+        <div class="row" id="forms_row">
+          <div class="col-6 col-md-4">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Wynagrodzenie (brutto)" type="number">
+              <input matInput placeholder="Wynagrodzenie (brutto)" type="number" formControlName="salaries">
             </mat-form-field>
           </div>
-          <div class="col-4">
+          <div class="col-6 col-md-4">
             <mat-form-field>
               <mat-select value="1">
                 <mat-option value="1">Umowa o pracę</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-4">
+          <div class="col-6 col-md-4">
             <mat-form-field>
               <mat-select value="1" placeholder="Wymiar czasu pracy:">
                 <mat-option value="1">Pełny etat</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-4">
+          <div class="col-6 col-md-4">
             <mat-form-field>
-              <mat-select value="1" placeholder="Czas rozpoczęcia nowej umowy:">
+              <mat-select value="1" placeholder="Czas rozpoczęcia nowej umowy:" >
                 <mat-option value="1">Nowy miesiąc</mat-option>
                 <mat-option value="2">Po zakończeniu obecnej</mat-option>
               </mat-select>
@@ -60,18 +72,19 @@
 
 
           <!-- shown when !employee.contract-->
-          <div class="col-4">
+          Ustawić datę miesięczną
+          <div class="col-6 col-md-4">
             <mat-form-field>
-              <input matInput [matDatepicker]="pickers" placeholder="Początek pracy">
+              <input matInput [matDatepicker]="pickers" placeholder="Początek pracy" formControlName="start_date">
               <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
               <mat-datepicker #pickers></mat-datepicker>
             </mat-form-field>
           </div>
 
 
-          <div class="col-4">
+          <div class="col-6 col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select placeholder="Długośc umowy">
+              <mat-select placeholder="Długośc umowy" formControlName="contract_period">
                 <mat-option value='1'>1 miesiac</mat-option>
                 <mat-option value='3'>3 miesiące</mat-option>
                 <mat-option value='6'>6 miesiący</mat-option>
@@ -83,21 +96,22 @@
           </div>
 
 
-          <div class="col-4">
+          <div class="col-6 col-md-4">
             <mat-form-field>
-              <mat-select placeholder="Okres wypowiedzenia:">
+              <mat-select placeholder="Okres wypowiedzenia:" formControlName="termination">
                 <mat-option value="1">14 dni</mat-option>
                 <mat-option value="2">30 dni</mat-option>         <!-- add [disable] depend of contract period-->
                 <mat-option value="3">60 dni</mat-option>
+                <mat-option value="4">90 dni</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-
         </div>
       </form>
-      <div class="center-text">
-        <button mat-raised-button>Anuluj</button>
-        <button mat-raised-button (click)="openBottomSheet()">Edytuj obecną umowę</button>
+      <div class="some_buttons">
+
+        <button mat-raised-button (click)="showform()" class="main_button warning">Anuluj</button>
+        <button mat-raised-button (click)="openBottomSheet()" class="main_button primary">Edytuj obecną umowę</button>
       </div>
     </div>
 

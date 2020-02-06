@@ -7,14 +7,20 @@ mat-form-field {
   .center-text;
 }
 .fa-times {
-  .absolute;
-  top: 0;
-  right: 0;
-  font-size: 20px;
-  .c-pointer;
-  color: @bg_color;
-  z-index: 5;
-  &:hover {
-    opacity: .8;
+    .absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    .c-pointer;
+    color: @bg_color;
+    z-index: 5;
+    &:hover {
+      opacity: .8;
+    }
   }
+#moved_row {
+  .relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
+
