@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Employee} from "../models/employee";
 import {AngularFireDatabase} from '@angular/fire/database';
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {map} from "rxjs/operators";
 
 @Injectable({
@@ -10,6 +10,8 @@ import {map} from "rxjs/operators";
 export class MainService {
 
   private Api_url = '/employees';
+  ScheduleArray = new BehaviorSubject(null);
+  EmplyeeSubject = new BehaviorSubject<Employee>(null);
 
   constructor(private db: AngularFireDatabase) { }
 
@@ -32,5 +34,15 @@ export class MainService {
   }
   editEmployee(key: string, employee: Employee) {
     return this.db.object<Employee>(`${this.Api_url}/${key}`).update(employee);
+  }
+  sharescheduleArray(what: any): void {
+    this.ScheduleArray.next({what});
+    console.log(this.ScheduleArray);
+  }
+  GetSubject(): Observable<any> {
+    return this.ScheduleArray.asObservable();
+  }
+  shareEmployee(employee: Employee): void {
+    this.EmplyeeSubject.next(employee);
   }
 }

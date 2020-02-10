@@ -1,4 +1,4 @@
-<div class="container-fluid" id="mycont">
+<div class="container-fluid" id="mycont" *ngIf="employee; else noemplyee">
   <div class="row p-2 p-md-4">
     <div class="offset-3 col-6 offset-md-0 col-md-3"><img src="../../../assets/images/Unknown.jpeg"></div>
     <div class="col-12 col-md-9 right_info">
@@ -117,3 +117,4 @@
 
   </div>
 </div>
+<ng-template #noemplyee>Należy wybrać najpierw pracownika! <button mat-raised-button class="main_button primary" (click)="backtocontracts()">Powrót</button> </ng-template>

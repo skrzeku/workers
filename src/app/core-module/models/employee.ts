@@ -22,6 +22,7 @@ export interface Employee {
   email: string,
   phone: string,
   age: number,
+  absences: number;
   schedule: [{
     month: number,
     year: number,

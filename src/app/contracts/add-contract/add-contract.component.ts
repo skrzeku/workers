@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {Employee} from "../../core-module/models/employee";
 import {Router} from "@angular/router";
+import {MainService} from "../../core-module/services/main.service";
 
 @Component({
   selector: 'app-add-contract',
@@ -14,7 +15,8 @@ export class AddContractComponent implements OnInit {
 
   constructor(private dialogref: MatDialogRef<AddContractComponent>,
               @Inject(MAT_DIALOG_DATA) private data,
-              private router: Router) {
+              private router: Router,
+              private mainservice: MainService) {
     this.employee = data;
   }
 
@@ -22,6 +24,7 @@ export class AddContractComponent implements OnInit {
   }
 
   GotoNewContract(employee: Employee, edit?: boolean): void {
+    this.mainservice.shareEmployee(employee);
     this.router.navigate(['contracts/new']).then(()=> {
       this.dialogref.close();
     });

@@ -5,12 +5,8 @@ import {BottomComponent} from "../../core-module/bottom/bottom.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MainService} from "../../core-module/services/main.service";
 import {AngularFireDatabase} from "@angular/fire/database";
-export interface schedule {
-  month: number,
-  year: number,
-  day: number,
-  what: string
-}
+import {schedule} from "../../core-module/models/schedule";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -27,6 +23,7 @@ export class NewContractComponent implements OnInit {
   editcontract: boolean = false;
   myarray: schedule[] = [];
   form: FormGroup;
+
   private Api_url = '/employees';
 
 
@@ -34,14 +31,15 @@ export class NewContractComponent implements OnInit {
               private formbuilder: FormBuilder,
               private _bottomSheetRef: MatBottomSheetRef<BottomComponent>,
               private mainservice: MainService,
-              private db: AngularFireDatabase) { }
+              private db: AngularFireDatabase,
+              private router: Router ) { }
 
   ngOnInit() {
-    this.BuildForm();
-    this.mainservice.getEmployees().subscribe((emps)=> {
-      this.employee = emps[0];
-      console.log(this.employee);
+    this.mainservice.EmplyeeSubject.subscribe((val)=> {
+      this.employee = val;
     });
+    this.BuildForm();
+
 
 
   }
@@ -70,7 +68,6 @@ export class NewContractComponent implements OnInit {
   }
   editEmployee(key: string, employee: Employee, what?: any, start?: any, salary?: any, termination?: any, period?: any ) {
     return this.db.object<Employee>(`${this.Api_url}/${key}`).update(employee); //{schedule: what, start_date: start, salaries: salary, termination: termination, contract_period: period}
-
   }
 
 
@@ -78,12 +75,27 @@ export class NewContractComponent implements OnInit {
   checkdates(): void {
     const emploeestartdate = this.form.controls['start_date'].value;
     const period = +this.form.controls['contract_period'].value;
+    const firstdayoftheyear = new Date(2020, 0, 1);
+    console.log(firstdayoftheyear);
 
 
+
+    for (let firstloop = firstdayoftheyear; firstloop < emploeestartdate; firstloop.setMonth(firstloop.getMonth() + 1)) {
+      const daysinMonth = this.daysInMonth(firstloop.getMonth(), firstloop.getFullYear());
+      console.log(daysinMonth);
+      for(let day = 1; day <= daysinMonth; day++) {
+        this.myarray.push({
+          day: day,
+          month: firstloop.getMonth(),
+          what: '-',
+          year: firstloop.getFullYear()
+        });
+      }
+    }
     const lastday = new Date(emploeestartdate.getFullYear(), emploeestartdate.getMonth() + period, emploeestartdate.getDate());
 
     for (let month = emploeestartdate; month < lastday; month.setMonth(month.getMonth() + 1)) {
-      const daysinMonth = this.daysInMonth(month.getMonth(), month.getFullYear());
+      const daysinMonth = this.daysInMonth(month.getMonth() + 1, month.getFullYear());
       for(let day = 1; day <= daysinMonth; day++) {
         const dynamicdate = new Date(month.getFullYear(), month.getMonth(), day);
         let whatstring = 'w';
@@ -99,10 +111,14 @@ export class NewContractComponent implements OnInit {
       }
     }
 
+
     this.form.controls['schedule'].setValue(this.myarray);
     this.editEmployee(this.employee.key, this.form.value);
 
 
+  }
+  backtocontracts(): void {
+    this.router.navigate(['contracts']);
   }
 
 }

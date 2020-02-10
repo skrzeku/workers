@@ -32,13 +32,13 @@
             <th mat-header-cell *matHeaderCellDef> Nazwisko </th>
             <td mat-cell *matCellDef="let element"> {{element?.last_name}} </td>
           </ng-container>
-          <ng-container matColumnDef="{{i + 1}}" *ngFor="let rows of myarray(31); let i = index">
+          <ng-container matColumnDef="{{i + 1}}" *ngFor="let rows of filldateArray(); let i = index">
           <th mat-header-cell *matHeaderCellDef> {{i + 1}} </th>
-          <td mat-cell *matCellDef="let element" (click)="addAbsence($event)" class="mycell"> {{element?.schedule[i].what}}</td>
+          <td mat-cell *matCellDef="let element" (click)="addAbsence($event, element)" class="mycell"> {{element?.schedule[daysbefore + i].what}}</td>
           </ng-container>
           <ng-container matColumnDef="summary">
             <th mat-header-cell *matHeaderCellDef> nb </th>
-            <td mat-cell *matCellDef="let element"> 0
+            <td mat-cell *matCellDef="let element" id="summary_td"> {{element?.absences}}
            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table_header"></tr>
@@ -58,8 +58,8 @@
       </div>
       <div class="some_buttons">
 
-        <button mat-raised-button class="main_button primary">Wrowadź zmiany +</button>
-        <button mat-raised-button>Zatwierdź zmiany</button>
+        <button mat-raised-button class="main_button primary" (click)="applychanges()">Wrowadź zmiany +</button>
+        <button mat-raised-button (click)="testSubject()">Test</button>
       </div>
     </div> <!-- end 12 -->
 
