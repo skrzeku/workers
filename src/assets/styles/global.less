@@ -114,6 +114,13 @@ body {
 
 
 //global classes
+
+
+.myshadow {
+  -webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.5);
+}
 .start_header {
   background-color: @bg_color;
   color: @natural_color;
@@ -148,6 +155,13 @@ body {
 }
 .succes_snack {
   background-color: green !important;
+  .myshadow;
+}
+.error_snack {
+  background-color: @bg_color;
+  color: @natural_color;
+  border: solid 2px @main_color;
+  .myshadow;
 }
 .top_filter_wrapper {
   .w(100%);

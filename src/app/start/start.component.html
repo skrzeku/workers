@@ -3,17 +3,15 @@
 </div>
 <div class="container-fluid overflow-hidden p-2 p-md-3">
   <div class="row">
-
-
     <div class="col-12 col-lg-6 p-3">
       <h4 class="dashboard_header">Pracownicy</h4>
       <div class="icon_div"><i class="fas fa-users"></i></div>
-      <div class="icon_info"><div>15</div><div>Łączna liczba pracowników</div></div>
+      <div class="icon_info"><div>{{momentemployees}}</div><div>Obecna liczba pracowników</div></div>
       <div class="charts_wrapper">
         <ngx-charts-bar-vertical
           [view]="workersview"
           [scheme]="workerscolors"
-          [results]="workersresults"
+          [results]="workersdatas"
           [xAxis]="showXAxis"
           [yAxis]="showYAxis"
           [showXAxisLabel]="showXAxisLabel"
@@ -26,12 +24,12 @@
     <div class="col-12 col-lg-6 p-3">
       <h4 class="dashboard_header">Wykształcenie</h4>
       <div class="icon_div"><i class="fas fa-user-graduate"></i></div>
-      <div class="icon_info"><div>Średnie</div><div> Najczęstszy poziom wykształcenia</div></div>
+      <div class="icon_info"><div>{{mosteducation}}</div><div> Najczęstszy poziom wykształcenia</div></div>
             <div class="charts_wrapper" id="advanced_pie">
               <ngx-charts-advanced-pie-chart
                 [view]="educationview"
                 [scheme]="workerscolors"
-                [results]="single"
+                [results]="educationdatas"
               >
               </ngx-charts-advanced-pie-chart>
             </div>
@@ -42,7 +40,7 @@
       <div class="row">
         <div class="col-12">
           <div class="icon_div"><i class="fas fa-user-times"></i></div>
-          <div class="icon_info"><div>5.3 dni</div><div> Średnia miesięczna absencja</div></div>
+          <div class="icon_info"><div>{{avgabsence}} dni</div><div> Średnia miesięczna absencja</div></div>
         </div>
         <div class="col-12">
           <div class="charts_wrapper">
@@ -56,7 +54,7 @@
               [xAxisLabel]="xAxisLabel"
               [yAxisLabel]="yAxisLabel"
               [timeline]="timeline"
-              [results]="multi"
+              [results]="avarageAbs"
             >
             </ngx-charts-line-chart>
           </div>
@@ -71,7 +69,7 @@
       <div class="row">
         <div class="col-12">
           <div class="icon_div"><i class="fas fa-coins"></i></div>
-          <div class="icon_info"><div>4500 zł</div><div> Średnie miesięczne wynagrodzenie</div></div>
+          <div class="icon_info"><div>{{avgsalary}} zł</div><div> Średnie miesięczne wynagrodzenie</div></div>
 
         </div>
         <div class="col-12">
@@ -86,7 +84,7 @@
               [xAxisLabel]="xAxisLabel"
               yAxisLabel="Wynagrodzenie"
               [timeline]="timeline"
-              [results]="multis"
+              [results]="avaragesalaries"
             >
             </ngx-charts-line-chart>
           </div>
@@ -110,29 +108,12 @@
     </div>
     <div class="col-12 col-md-6">
       <div class="icon_div"><i class="fas fa-user-times"></i></div>
-      <div class="icon_info"><div>76</div><div> Liczba absencji Styczeń 2020</div></div>
-      <div class="charts_wrapper">
-        <ngx-charts-bar-horizontal
-          [view]="workersview"
-          [scheme]="workerscolors"
-          [results]="horizontal"
-          [gradient]="gradient"
-          [xAxis]="showXAxis"
-          [yAxis]="showYAxis"
-          [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
-        >
-        </ngx-charts-bar-horizontal>
-      </div>
-    </div>
-    <div class="col-12 col-md-6">
-      <div class="icon_div"><i class="fas fa-coins"></i></div>
-      <div class="icon_info"><div>370000 zł</div><div> Koszty wynagrodzeń Styczeń 2020</div></div>
+      <div class="icon_info"><div>{{summaries[table_month].absences}} dni</div><div> Liczba absencji Styczeń 2020</div></div>
       <div class="charts_wrapper">
         <ngx-charts-bar-vertical
           [view]="workersview"
           [scheme]="workerscolors"
-          [results]="workersresults"
+          [results]="bottomAbsences"
           [xAxis]="showXAxis"
           [yAxis]="showYAxis"
           [showXAxisLabel]="showXAxisLabel"
@@ -141,12 +122,21 @@
         </ngx-charts-bar-vertical>
       </div>
     </div>
-
-
-
-
-
-
-
+    <div class="col-12 col-md-6">
+      <div class="icon_div"><i class="fas fa-coins"></i></div>
+      <div class="icon_info"><div>{{allmonthSalaries}} zł</div><div> Koszty wynagrodzeń Styczeń 2020</div></div>
+      <div class="charts_wrapper">
+        <ngx-charts-bar-vertical
+          [view]="workersview"
+          [scheme]="workerscolors"
+          [results]="salariescost"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+        >
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
 </div>
 </div>

@@ -74,11 +74,19 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
     this.showright = false;
   }
   RemoveEmploee() {
-    if (this.employee.contract_end < +new Date()) {
-      this.snack.open('Nie można usunąć pracownika, ponieważ posiada ważną umowę');
-      return false;
+    if (!this.employee.contract_end) {
+      this.snack.open('Nie można usunąć pracownika, ponieważ posiada ważną umowę', '', {panelClass: 'error_snack'});
     }
-  this._bottomSheet.open(BottomComponent, {autoFocus: false});
+    else {
+      this._bottomSheet.open(BottomComponent, {autoFocus: false});
+    }
+
+  }
+  gotoEdit(employee: Employee): void {
+    this.router.navigate(['employees/new']).then(()=> {
+    this.mainservice.shareEmployee(employee);
+    console.log(employee);
+    });
   }
 
 

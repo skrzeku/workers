@@ -1,3 +1,5 @@
+import {schedule} from "./schedule";
+
 export interface Employee {
   id: number,
   first_name: string,
@@ -22,11 +24,6 @@ export interface Employee {
   email: string,
   phone: string,
   age: number,
-  absences: number;
-  schedule: [{
-    month: number,
-    year: number,
-    day: number,
-    what: string
-  }]
+  absences: number,
+  schedule: schedule[];
 }

@@ -81,7 +81,7 @@ export class NewContractComponent implements OnInit {
 
 
     for (let firstloop = firstdayoftheyear; firstloop < emploeestartdate; firstloop.setMonth(firstloop.getMonth() + 1)) {
-      const daysinMonth = this.daysInMonth(firstloop.getMonth(), firstloop.getFullYear());
+      const daysinMonth = this.daysInMonth(firstloop.getMonth() + 1, firstloop.getFullYear());
       console.log(daysinMonth);
       for(let day = 1; day <= daysinMonth; day++) {
         this.myarray.push({
@@ -92,6 +92,8 @@ export class NewContractComponent implements OnInit {
         });
       }
     }
+
+
     const lastday = new Date(emploeestartdate.getFullYear(), emploeestartdate.getMonth() + period, emploeestartdate.getDate());
 
     for (let month = emploeestartdate; month < lastday; month.setMonth(month.getMonth() + 1)) {

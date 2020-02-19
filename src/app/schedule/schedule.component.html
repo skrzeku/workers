@@ -1,6 +1,7 @@
 <div class="start_header">
   <h5><i class="fas fa-user-times"></i>Nieobecności</h5>
 </div>
+
 <div class="container-fluid">
   <div class="row relative">
     <div class="col-12">
@@ -9,7 +10,7 @@
         <form>
           <mat-form-field>
             <input matInput [max]="maxDate" [min]="minDate" [matDatepicker]="dp" placeholder="Okres:" [formControl]="date">
-            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="dp" #lol (focus)="testSubject()"></mat-datepicker-toggle>
             <mat-datepicker #dp
                             startView="multi-year"
                             (yearSelected)="chosenYearHandler($event)"
@@ -26,7 +27,7 @@
         <button mat-raised-button class="main_button primary">Zastosuj</button>
     </div>
       <div class="example-container mat-elevation-z8 relative">
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="filtredEmployees">
           <!-- Position Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nazwisko </th>
@@ -37,27 +38,25 @@
           <td mat-cell *matCellDef="let element" (click)="addAbsence($event, element)" class="mycell"> {{element?.schedule[daysbefore + i].what}}</td>
           </ng-container>
           <ng-container matColumnDef="summary">
-            <th mat-header-cell *matHeaderCellDef> nb </th>
+            <th mat-header-cell *matHeaderCellDef class="center-text p-0"> nb </th>
             <td mat-cell *matCellDef="let element" id="summary_td"> {{element?.absences}}
            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table_header"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" #rows></tr>
         </table>
+      </div>
+
+      <div class="some_buttons">
         <div class="day_action">
-          <mat-form-field class="example-full-width">
-            <mat-select placeholder="Rodzaj nieobecności" value="1">
-              <mat-option value='1'>Urlop</mat-option>
-              <mat-option value='2'>Zwolnienie</mat-option>
-              <mat-option value='3'>Reset</mat-option>
+          <mat-form-field class="example-full-width" >
+            <mat-select placeholder="Rodzaj nieobecności" value="U" [(ngModel)]="absencesselect">
+              <mat-option value='U'>Urlop</mat-option>
+              <mat-option value='Z'>Zwolnienie</mat-option>
+              <mat-option value='w'>Reset</mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-raised-button class="main_button primary">Zatwierdź</button>
-
         </div>
-      </div>
-      <div class="some_buttons">
-
         <button mat-raised-button class="main_button primary" (click)="applychanges()">Wrowadź zmiany +</button>
         <button mat-raised-button (click)="testSubject()">Test</button>
       </div>

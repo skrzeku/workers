@@ -145,14 +145,14 @@
                <div><span>Koniec umowy:</span> {{employee?.contract_end}}</div>
                <div><span>Staż pracy:</span> Obliczyć</div>
                <div><span>Wynagordzenie:</span> {{employee?.pesel}}</div>
-               <div><span>Nieobecności:</span> Obliczyć</div>
+               <div><span>Nieobecności:</span> {{employee?.absences}} Dni</div>
                <div><span>Pozostały urlop:</span> Obliczyć</div>
              </div>
              <div class="col-12 col-sm-6">
                <h6><i class="fas fa-tools"></i>Akcje:</h6>
                <div id="action_wrapper">
                  <i class="fas fa-at" [matTooltip]="employee?.email" [matTooltipClass]="'tool-tip'"></i>
-                 <i class="fas fa-edit" matTooltip="Edycja Pracownika"></i>
+                 <i class="fas fa-edit" matTooltip="Edycja Pracownika" (click)="gotoEdit(employee)"></i>
                  <i class="fas fa-user-times" matTooltip="Usunięcie Pracownika" (click)="RemoveEmploee()"></i>
                  <i class="fas fa-file-signature" matTooltip="Dodaj Umowę"></i>
                </div>

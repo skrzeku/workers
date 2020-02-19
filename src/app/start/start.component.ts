@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Employee} from "../core-module/models/employee";
 import {MainService} from "../core-module/services/main.service";
-
 import {FormControl} from "@angular/forms";
 import * as _moment from "moment";
 import {Moment} from "moment";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepicker} from "@angular/material";
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/material-moment-adapter";
+import {Summary} from "../core-module/models/summary";
+import {Subscription} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 const moment =  _moment;
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'MM/YYYY',
@@ -19,16 +22,17 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
+export interface tableObject {
+  name: string,
+  value: number
+}
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.less'],
   providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
+
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -38,177 +42,22 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class StartComponent implements OnInit {
+export class StartComponent implements OnInit, OnDestroy {
   employees: Employee[];
-  workersresults: any[] = [{
-    "name": "IT",
-    "value": 2
-  },
-    {
-      "name": "Księgowość",
-      "value": 4
-    },
-    {
-      "name": "Ochrona",
-      "value": 3
-    },
-    {
-      "name": "Produkcja",
-      "value": 8
-    },
-    {
-      "name": "Administracja",
-      "value": 3
-    }];
 
-  single: any[] = [  {
-    "name": "Podstawowe",
-    "value": 1
-  },
-    {
-      "name": "Gimnazjalne",
-      "value": 2
-    },
-    {
-      "name": "Średnie",
-      "value": 13
-    },
-    {
-      "name": "Wyższe",
-      "value": 31
-    },
-    {
-      "name": "Zawodowe",
-      "value": 44
-    }];
-  multi: any[] = [  {
-    "name": "Germany",
-    "series": [
-      {
-        "name": "01/2019",
-        "value": 6.1
-      },
-      {
-        "name": "02/2019",
-        "value": 6.4
-      },
-      {
-        "name": "03/2019",
-        "value": 5.9
-      },
-      {
-        "name": "04/2019",
-        "value": 5.2
-      },
-      {
-        "name": "05/2019",
-        "value": 6.5
-      },
-      {
-        "name": "06/2019",
-        "value": 6.7
-      },
-      {
-        "name": "07/2019",
-        "value": 11.2
-      }, {
-        "name": "08/2019",
-        "value": 14.3
-      }, {
-        "name": "09/2019",
-        "value": 10.5
-      }, {
-        "name": "10/2019",
-        "value": 3.2
-      }, {
-        "name": "11/2019",
-        "value": 2.5
-      }, {
-        "name": "12/2019",
-        "value": 5.6
-      }, {
-        "name": "01/2020",
-        "value": 6.2
-      },
-    ]
-  }];
-  multis: any[] = [
-    {
-      "name": "Germany",
-      "series": [
-        {
-          "name": "01/2019",
-          "value": 6.1
-        },
-        {
-          "name": "02/2019",
-          "value": 6.4
-        },
-        {
-          "name": "03/2019",
-          "value": 5.9
-        },
-        {
-          "name": "04/2019",
-          "value": 5.2
-        },
-        {
-          "name": "05/2019",
-          "value": 6.5
-        },
-        {
-          "name": "06/2019",
-          "value": 6.7
-        },
-        {
-          "name": "07/2019",
-          "value": 11.2
-        }, {
-          "name": "08/2019",
-          "value": 14.3
-        }, {
-          "name": "09/2019",
-          "value": 10.5
-        }, {
-          "name": "10/2019",
-          "value": 3.2
-        }, {
-          "name": "11/2019",
-          "value": 2.5
-        }, {
-          "name": "12/2019",
-          "value": 5.6
-        }, {
-          "name": "01/2020",
-          "value": 6.2
-        }]}
-  ];
-  horizontal: any[] = [  {
-    "name": "IT",
-    "value": 6
-  },
-    {
-      "name": "Księgowość",
-      "value": 5
-    },
-    {
-      "name": "Administracja",
-      "value": 5
-    },
-    {
-      "name": "Ochrona",
-      "value": 10
-    },
-    {
-      "name": "Produkcja",
-      "value": 14
-    }];
+  workersdatas: tableObject[];
+  educationdatas: tableObject[];
+  salariescost: tableObject[];
+  avarageAbs: any[];
+  allmonthSalaries: number;
+  avaragesalaries: any[];
+  bottomAbsences: tableObject[];
   months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Pażdziernik', 'Listopad', 'Grudzień'];
   workersview: any[];
   educationview: any[] = [550, 200];
   gradient: boolean = false;
   table_year = 2020;
-  table_month = 0;
+  table_month = 1;
   workerscolors = {
     domain: ['#111111', '#2DBB54']
   };
@@ -222,27 +71,98 @@ export class StartComponent implements OnInit {
   yAxisLabel = 'Liczba Dni';
   timeline: boolean = false;
   xAxis: boolean = true;
+  subscribtion: Subscription;
   yAxis: boolean = true;
   showLegend: boolean = true;
   date = new FormControl(moment());
   maxDate =  moment();
   minDate = new Date(2019, 0, 1);
+  departments = ['IT', 'Księgowość', 'Administracja', 'Ochrona', 'Pracownik Produkcji'];
+  educations = ['Podstawowe', 'Gimnazjalne', 'Zawodowe', 'Średnie', 'Wyższe'];
+  mosteducation: string;
+  summaries: Summary[];
+  momentemployees: number;
+  avgsalary: number;
+  avgabsence: number;
+
 
 
 
   constructor(private mainservice: MainService) { }
 
   ngOnInit() {
-    this.mainservice.getEmployees().subscribe((emps)=> {
-      this.employees = emps;
+            this.mainservice.getSummaries().subscribe((summs)=> {
+              this.summaries = summs;
+              this.momentemployees= summs[moment().month()].employees;
+              this.avarageAbsences(summs);
+            });
+        this.subscribtion =this.mainservice.getEmployees()
+          .subscribe((emps)=> {
+          this.employees = emps;
+          this.workersdatas = [];
+          this.educationdatas = [];
+          this.checkavaragesalaries(emps);
+          this.countMonthAbsences(emps, 1);
+          this.countMonthSalaries(emps, 1);
+          this.departments.forEach((one)=> {
+            const dep = emps.filter(on => on.department.includes(one) && this.FilterEmployees(on)).length;
+            this.workersdatas.push({name: one, value: dep});
+          });
+
+          this.educations.forEach((one)=> {
+            const edu = emps.filter(on => on.education.includes(one)).length;
+            this.educationdatas.push({name: one, value: edu});
+          });
+
+          const mynumb =this.educationdatas.map(on => on.value);
+          this.mosteducation = this.educationdatas.filter(one => one.value === Math.max(...mynumb))[0].name;
+        });
+  }
+ngOnDestroy(): void {
+    //this.subscribtion.unsubscribe();
+}
+
+  FilterEmployees(employee: Employee, month = moment().month()) {
+      return employee.schedule.some(one => !one.what.includes("-") && one.month === month);
+  }
+
+  avarageAbsences(summaries: Summary[]): void {
+    this.avarageAbs = [{
+      name: 'Absencje',
+      series: []
+    }];
+    let workers = [];
+    let absences = [];
+    summaries.forEach((onemonth)=> {
+      this.avarageAbs[0].series.push({name: (onemonth.month + 1).toString() + '/2020', value: (onemonth.absences/onemonth.employees) || 0});
+      workers.push(onemonth.employees);
+      absences.push(onemonth.absences);
     });
+    this.avgabsence = Math.round((absences.reduce((a,b)=> a+b, 0)/ workers.reduce((a,b)=>a+b,0) * 10))/ 10;
+  }
+
+  checkavaragesalaries(employees: Employee[]): void {
+    this.avaragesalaries = [{
+      name: 'Wynagrodzenie',
+      series: []
+    }];
+    let money = [];
+    let workers = [];
+    this.summaries.forEach((onemonth)=> {
+      const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, onemonth.month));
+      const salaryamount = Math.round(employeesInMonth.map(on=> on.salaries).reduce((a,b)=> a + b,0));
+      console.log(salaryamount);
+      this.avaragesalaries[0].series.push({name: (onemonth.month + 1).toString() + '/2020', value: salaryamount/employeesInMonth.length || 0});
+     money.push(salaryamount);
+     workers.push(employeesInMonth.length);
+    });
+    this.avgsalary = Math.round(money.reduce((a,b)=> a+b, 0) / workers.reduce((a,b)=>a+b,0));
   }
 
   chosenYearHandler(normalizedYear: Moment) {
     const ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());
     this.date.setValue(ctrlValue);
-
   }
 
   chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
@@ -253,5 +173,29 @@ export class StartComponent implements OnInit {
     this.date.setValue(ctrlValue);
     datepicker.close();
   }
+  countMonthAbsences(employees: Employee[], month: number): void {
+    this.bottomAbsences = [];
+    const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, month));
+    this.departments.forEach((department)=> {
+      let departmentarray = [];
+      const workerfromdepartment = employeesInMonth.filter(one => one.department.includes(department));
+      workerfromdepartment.forEach((oneEmp)=> {
+        const daysPerOnedepartWorker = oneEmp.schedule.filter((oneday)=> oneday.month === month && (oneday.what.includes('U') || oneday.what.includes('Z'))).length;
+        departmentarray.push(daysPerOnedepartWorker);
+      });
+      this.bottomAbsences.push({name: department, value: departmentarray.reduce((a,b)=>a+b,0)});
+      });
+  }
+  countMonthSalaries(employees: Employee[], month: number): void {
+    this.salariescost = [];
+    const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, month));
+    this.departments.forEach((department)=> {
+     const cost = employeesInMonth.filter((one)=> one.department.includes(department))
+        .map(one => one.salaries)
+        .reduce((a,b)=>a+b,0);
+     this.salariescost.push({name: department, value: cost});
+     this.allmonthSalaries = this.salariescost.map(one => one.value).reduce((a,b)=> a+b,0);
 
+    });
+  }
 }

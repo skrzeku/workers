@@ -1,8 +1,9 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MainService} from "../../core-module/services/main.service";
 import {Router} from "@angular/router";
+import {Employee} from "../../core-module/models/employee";
 
 
 export interface schedule {
@@ -17,7 +18,7 @@ export interface schedule {
   templateUrl: './new-employee.component.html',
   styleUrls: ['./new-employee.component.less']
 })
-export class NewEmployeeComponent implements OnInit {
+export class NewEmployeeComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   departments = ['IT', 'Księgowość', 'Administracja', 'Ochrona', 'Pracownik Produkcji'];
@@ -25,6 +26,7 @@ export class NewEmployeeComponent implements OnInit {
   sex = ['Kobieta', 'Mężczyzna'];
   CV_file: File;
   myarray: schedule[] = [];
+  employee: Employee;
 
   constructor(private formbuilder: FormBuilder,
               private mainservice: MainService,
@@ -33,6 +35,10 @@ export class NewEmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.BuildForm();
+    this.LoadEmployee();
+  }
+  ngOnDestroy(): void {
+    this.mainservice.shareEmployee(null);
   }
 
   private BuildForm(): void {
@@ -51,12 +57,8 @@ export class NewEmployeeComponent implements OnInit {
       contract_period: '',
       experience_all: ['', Validators.required],
       experience_here: '',
-      schedule: [{
-        month: 1,
-        year: 2002,
-        day: 1,
-        what: 'w'
-      }],
+      absences: 0,
+      schedule: [],
       pesel: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       phone: ''
@@ -66,12 +68,30 @@ export class NewEmployeeComponent implements OnInit {
   Add_Employee(): void {
     const date = this.form.controls['birthday'].value;
     this.form.controls['birthday'].setValue(+date);
-    const start_date = this.form.controls['start_date'].value;
-    this.form.controls['start_date'].setValue(+start_date);
+    //const start_date = this.form.controls['start_date'].value;
+    //this.form.controls['start_date'].setValue(+start_date);
     this.mainservice.addEmployee(this.form.value).then(()=> {
       this.snack.open('Pomyślnie dodano pracownika!', '', {duration: 3000, panelClass: 'succes_snack'});
     });
   }
+  Edit_Employee(employee: Employee): void {
+    const date = this.form.controls['birthday'].value;
+    this.form.controls['birthday'].setValue(+date);
+     this.mainservice.editEmployee(employee.key, this.form.value).then(()=> {
+       this.router.navigate(['employees']).then(()=> {
+         this.snack.open('Pomyślnie edytowano pracownika!', '', {duration: 3000, panelClass: 'succes_snack'});
+       });
+     });
+  }
+  LoadEmployee(): void {
+    if (this.mainservice.EmplyeeSubject.value) {
+      this.mainservice.EmplyeeSubject.subscribe((employee)=> {
+        this.employee = employee;
+        this.form.patchValue(employee);
+      })
+    }
+  }
+
 
 
 

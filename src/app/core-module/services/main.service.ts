@@ -3,6 +3,7 @@ import {Employee} from "../models/employee";
 import {AngularFireDatabase} from '@angular/fire/database';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {map} from "rxjs/operators";
+import {Summary} from "../models/summary";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import {map} from "rxjs/operators";
 export class MainService {
 
   private Api_url = '/employees';
+  private summ_url = '/summary';
   ScheduleArray = new BehaviorSubject(null);
   EmplyeeSubject = new BehaviorSubject<Employee>(null);
 
@@ -29,6 +31,18 @@ export class MainService {
   addEmployee(employee: Employee) {
     return this.db.list<Employee>(this.Api_url).push(employee);
   }
+  addSummary(summary: Summary) {
+    return this.db.list<Summary>(this.summ_url).push(summary);
+  }
+  editSummary(key: string, summary: Summary) {
+    return this.db.object<Summary>(`${this.summ_url}/${key}`).update(summary);
+  }
+  getSummaries(): Observable<Summary[]> {
+    return this.db.list<Summary>(this.summ_url).snapshotChanges()
+      .pipe(map(response => response.map(summary => this.assignKey(summary))));
+  }
+
+
   deleteEmployee(key: string) {
     return this.db.object(`${this.Api_url}/${key}`).remove();
   }

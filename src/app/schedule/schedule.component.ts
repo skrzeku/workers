@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {Moment} from 'moment';
@@ -11,6 +11,7 @@ import {ActionDialogComponent} from "./action-dialog/action-dialog.component";
 import {AngularFireDatabase} from "@angular/fire/database";
 import {schedule} from "../core-module/models/schedule";
 import {toArray} from "rxjs/operators";
+import {Summary} from "../core-module/models/summary";
 
 const moment =  _moment;
 
@@ -57,11 +58,15 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   table_month = 0;
   maxDate =  new Date(2020, 3, 1);
   minDate = new Date(2019, 0, 1);
+  @ViewChild('lol', {static: true}) lol: ElementRef;
   @ViewChildren('rows', {read: ElementRef}) rows: QueryList<ElementRef>;
   private Api_url = '/employees';
+  private sum_ulr = '/summary';
   schedulearray: schedule[] = [];
   arrayofemployees: Employee[] = [];
   daysbefore: number;
+  filtredEmployees: Employee[];
+  arrayofsummaries: Summary[] = [];
 
 
 
@@ -77,6 +82,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   employees: Employee[];
   dataSource: Employee[];
   subscription: any;
+  absencesselect = 'U';
 
 
   //charts
@@ -97,11 +103,20 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
     this.mainservice.getEmployees().subscribe((employees)=> {
       this.employees = employees;
       this.dataSource = employees;
+     this.filtredEmployees = this.FilterEmployees(employees, this.table_month);
     });
   }
 
   ngAfterViewInit(): void {
-
+    this.mainservice.getSummaries().subscribe((all)=> {
+      this.arrayofsummaries = all;
+      console.log(all);
+    })
+  }
+  FilterEmployees(employees: Employee[], months: number) {
+    return employees.filter((one) => {
+      return one.schedule.some(one => !one.what.includes("-") && one.month === months);
+    });
   }
 
   filldateArray(): any[] {
@@ -143,14 +158,13 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonth.month());
-    console.log(ctrlValue.year());
-    console.log(ctrlValue.month());
     this.table_year = ctrlValue.year();
     this.table_month = ctrlValue.month();
     this.date.setValue(ctrlValue);
     this.getdaysbefore();
     this.filldateArray();
     this.pushdays();
+    this.filtredEmployees = this.FilterEmployees(this.employees, this.table_month);
     datepicker.close();
   }
   addAbsence(element: any, employee: Employee): void {
@@ -160,20 +174,36 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
 
     this.schedulearray = employee.schedule;
     const ind = employee.schedule.findIndex((obj)=> obj.month === this.table_month && obj.day === element.target.cellIndex);
-    employee.schedule[ind].what = 'U';
+    employee.schedule[ind].what = this.absencesselect;
   }
-  editEmployee(key: string, what?: any, absences?: number ) {
+  editEmployee(key: string, what?: any, absences?: any ) {
     return this.db.object<Employee>(`${this.Api_url}/${key}`).update({schedule: what, absences: absences}); //{schedule: what, start_date: start, salaries: salary, termination: termination, contract_period: period}
+  }
+  editSummary(key: string, month?: any, absences?: any ) {
+    return this.db.object<Summary>(`${this.sum_ulr}/${key}`).update({month: month, absences: absences}); //{schedule: what, start_date: start, salaries: salary, termination: termination, contract_period: period}
   }
 
   applychanges(): void {
     this.arrayofemployees.forEach((one)=> {
-      const length = one.schedule.filter((one) => one.what === 'U').length;
+      const length = one.schedule.filter((one) => one.what === 'U' || one.what === 'Z').length;
       this.editEmployee(one.key, one.schedule, length);
     })
   }
   testSubject(): void {
+    this.arrayofsummaries.forEach((one)=> {
+      let montharray = [];
+      this.employees.forEach((on)=> {
+        const length = on.schedule.filter((ones)=> (ones.what.includes('U') || ones.what.includes('Z')) && ones.month === one.month).length;
+        montharray.push(length);
+      });
+      const count = montharray.reduce((a, b) => a + b,0);
+      this.editSummary(one.key, one.month, count);
+    });
 
+
+  }
+  dosometning(e: any): void {
+    console.log(e);
   }
 
 }

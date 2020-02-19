@@ -17,7 +17,8 @@ export class SidebarComponent implements OnInit {
   sendOutput(): void {
     this.navibool = !this.navibool;
     this.naviOutput.emit(this.navibool);
-
+    console.log('dziala');
+    console.log(this.navibool);
   }
 
 }

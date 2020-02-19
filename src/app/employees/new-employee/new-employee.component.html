@@ -1,5 +1,6 @@
 <div class="container-fluid pt-3">
-  <h5 class="dashboard_header">Nowy pracownik</h5>
+  <h5 class="dashboard_header" *ngIf="!employee">Nowy pracownik</h5>
+  <h5 class="dashboard_header" *ngIf="employee">Edycja pracownika</h5>
   <form [formGroup]="form">
     <div class="row">
       <div class="col-12 col-md-3 center-text mt-3">
@@ -102,7 +103,8 @@
     <button (click)="checkdates()">lol</button>
     <button mat-raised-button (click)="form.reset()" class="main_button warning">Wyczysc</button>
     <button mat-raised-button (click)="closeIt()" class="main_button warning">Anuluj</button>
-    <button mat-raised-button (click)="Add_Employee()" [disabled]="form.invalid" class="main_button success">Dodaj +</button>
+    <button mat-raised-button (click)="Add_Employee()" [disabled]="form.invalid" class="main_button success" *ngIf="!employee">Dodaj +</button>
+    <button mat-raised-button [disabled]="form.invalid" class="main_button success" *ngIf="employee" (click)="Edit_Employee(employee)">Edytuj +</button>
   </div>
 
 
