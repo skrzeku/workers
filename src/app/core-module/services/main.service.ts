@@ -4,6 +4,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {map} from "rxjs/operators";
 import {Summary} from "../models/summary";
+import {AngularFireAuth} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,10 @@ export class MainService {
   private summ_url = '/summary';
   ScheduleArray = new BehaviorSubject(null);
   EmplyeeSubject = new BehaviorSubject<Employee>(null);
+  readonly authState$ = this.fireAuth.authState;
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+              private fireAuth: AngularFireAuth) { }
 
   getEmployees(): Observable<Employee[]> {
     return this.db.list<Employee>(this.Api_url).snapshotChanges()
@@ -59,4 +62,14 @@ export class MainService {
   shareEmployee(employee: Employee): void {
     this.EmplyeeSubject.next(employee);
   }
+
+
+
+                  //   Login
+              login(credentials: {email, password}) {
+                return this.fireAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
+              }
+              logout() {
+                return this.fireAuth.auth.signOut();
+              }
 }

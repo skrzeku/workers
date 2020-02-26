@@ -100,7 +100,6 @@
     </div>
   </form>
   <div id="add_btn_wrapper" class="mb-5">
-    <button (click)="checkdates()">lol</button>
     <button mat-raised-button (click)="form.reset()" class="main_button warning">Wyczysc</button>
     <button mat-raised-button (click)="closeIt()" class="main_button warning">Anuluj</button>
     <button mat-raised-button (click)="Add_Employee()" [disabled]="form.invalid" class="main_button success" *ngIf="!employee">Dodaj +</button>

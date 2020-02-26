@@ -77,41 +77,16 @@
       <div class="col-12 p-3">
         <h5 class="dashboard_header">Ostatnio dodani</h5>
         <div class="row">
-          <div class="col-4 col-sm-3 center-text">
+          <div class="col-4 col-sm-3 center-text" *ngFor="let emps of employees?.reverse().slice(0,4)">
             <div class="worker_img"></div>
-            <div>{{employees[0]?.last_name}}</div>
-            <div>{{employees[0]?.department}}</div>
-            <div>{{employees[0]?.position}}</div>
-            <div>{{employees[0]?.age}}</div>
-          </div>
-          <div class="col-4 col-sm-3 center-text">
-            <div class="worker_img"></div>
-            <div>{{employees[10]?.last_name}}</div>
-            <div>{{employees[10]?.department}}</div>
-            <div>{{employees[10]?.position}}</div>
-            <div>{{employees[10]?.age}}</div>
-          </div>
-          <div class="col-4 col-sm-3 center-text">
-            <div class="worker_img"></div>
-            <div>{{employees[11]?.last_name}}</div>
-            <div>{{employees[11]?.department}}</div>
-            <div>{{employees[11]?.position}}</div>
-            <div>{{employees[11]?.age}}</div>
-          </div>
-          <div class="col-sm-3 d-none d-sm-inline-block center-text">
-            <div class="worker_img"></div>
-            <div>{{employees[9]?.last_name}}</div>
-            <div>{{employees[9]?.department}}</div>
-            <div>{{employees[9]?.position}}</div>
-            <div>{{employees[9]?.age}}</div>
+            <div>lol: {{emps.last_name}}</div>
+            <div>{{emps.department}}</div>
+            <div>{{emps.position}}</div>
+            <div>{{emps.age}}</div>
           </div>
         </div>
       </div>
     </div>
-
-
-
-
           <!-- Right side-->
 
       <div class="right_employees_inside" [ngClass]="{'right_shown': showright}">

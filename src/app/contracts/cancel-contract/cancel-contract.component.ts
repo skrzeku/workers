@@ -12,7 +12,7 @@ import {BottomComponent} from "../../core-module/bottom/bottom.component";
 })
 export class CancelContractComponent implements OnInit {
   employee: Employee;
-  @ViewChild('autosize', {static: false}) autosize: CdkTextareaAutosize;
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
 
   constructor(private dialogref: MatDialogRef<CancelContractComponent>,

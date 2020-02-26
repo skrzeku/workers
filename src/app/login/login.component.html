@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="start_header">
+  <h5><i class="fas fa-sign-in-alt"></i>Logowanie</h5>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-2 col-8 offset-md-3 col-md-6 py-5">
+      <div id="login_frame">
+        <h3 class="text-center">Logowanie</h3>
+        <div class="one_field">
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Email" [(ngModel)]="logins">
+          </mat-form-field>
+        </div>
+        <div class="one_field">
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" placeholder="Hasło" [(ngModel)]="password">
+          </mat-form-field>
+        </div>
+        <div class="text-center">
+          <button mat-raised-button class="main_button warning" (click)="login(logins, password)">Zaloguj</button>
+          <h6>Zaloguj jako gość</h6>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

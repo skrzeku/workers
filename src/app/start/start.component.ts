@@ -7,8 +7,8 @@ import {Moment} from "moment";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepicker} from "@angular/material";
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {Summary} from "../core-module/models/summary";
-import {Subscription} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import {Subject, Subscription} from "rxjs";
+import {map, takeUntil} from "rxjs/operators";
 const moment =  _moment;
 
 export const MY_FORMATS = {
@@ -44,6 +44,7 @@ export interface tableObject {
 })
 export class StartComponent implements OnInit, OnDestroy {
   employees: Employee[];
+  subscription$ = new Subject();
 
   workersdatas: tableObject[];
   educationdatas: tableObject[];
@@ -53,8 +54,8 @@ export class StartComponent implements OnInit, OnDestroy {
   avaragesalaries: any[];
   bottomAbsences: tableObject[];
   months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Pażdziernik', 'Listopad', 'Grudzień'];
-  workersview: any[];
-  educationview: any[] = [550, 200];
+  workersview: [number, number];
+  educationview: [number, number] = [550, 200];
   gradient: boolean = false;
   table_year = 2020;
   table_month = 1;
@@ -84,6 +85,7 @@ export class StartComponent implements OnInit, OnDestroy {
   momentemployees: number;
   avgsalary: number;
   avgabsence: number;
+  math: number = Math.random();
 
 
 
@@ -91,12 +93,15 @@ export class StartComponent implements OnInit, OnDestroy {
   constructor(private mainservice: MainService) { }
 
   ngOnInit() {
+    this.math = Math.random();
             this.mainservice.getSummaries().subscribe((summs)=> {
               this.summaries = summs;
               this.momentemployees= summs[moment().month()].employees;
               this.avarageAbsences(summs);
             });
         this.subscribtion =this.mainservice.getEmployees()
+          .pipe(
+            takeUntil(this.subscription$))
           .subscribe((emps)=> {
           this.employees = emps;
           this.workersdatas = [];
@@ -106,6 +111,7 @@ export class StartComponent implements OnInit, OnDestroy {
           this.countMonthSalaries(emps, 1);
           this.departments.forEach((one)=> {
             const dep = emps.filter(on => on.department.includes(one) && this.FilterEmployees(on)).length;
+            //const dep = this.filterEmps(emps, this.table_month).length;
             this.workersdatas.push({name: one, value: dep});
           });
 
@@ -119,11 +125,17 @@ export class StartComponent implements OnInit, OnDestroy {
         });
   }
 ngOnDestroy(): void {
-    //this.subscribtion.unsubscribe();
+  this.subscription$.next();
+  this.subscription$.complete();
 }
 
   FilterEmployees(employee: Employee, month = moment().month()) {
       return employee.schedule.some(one => !one.what.includes("-") && one.month === month);
+  }
+  filterEmps(employees: Employee[], month = moment().month()): any {
+    return employees.filter((one)=> {
+         return one.schedule.some((siema)=> !siema.what.includes("-") && siema.month === month);
+    })
   }
 
   avarageAbsences(summaries: Summary[]): void {
@@ -149,9 +161,10 @@ ngOnDestroy(): void {
     let money = [];
     let workers = [];
     this.summaries.forEach((onemonth)=> {
-      const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, onemonth.month));
+      //const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, onemonth.month));
+      const employeesInMonth = this.filterEmps(employees, onemonth.month);
+      console.log(employeesInMonth);
       const salaryamount = Math.round(employeesInMonth.map(on=> on.salaries).reduce((a,b)=> a + b,0));
-      console.log(salaryamount);
       this.avaragesalaries[0].series.push({name: (onemonth.month + 1).toString() + '/2020', value: salaryamount/employeesInMonth.length || 0});
      money.push(salaryamount);
      workers.push(employeesInMonth.length);
@@ -173,9 +186,10 @@ ngOnDestroy(): void {
     this.date.setValue(ctrlValue);
     datepicker.close();
   }
+
   countMonthAbsences(employees: Employee[], month: number): void {
     this.bottomAbsences = [];
-    const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, month));
+    const employeesInMonth = this.filterEmps(employees, month);
     this.departments.forEach((department)=> {
       let departmentarray = [];
       const workerfromdepartment = employeesInMonth.filter(one => one.department.includes(department));
@@ -188,7 +202,8 @@ ngOnDestroy(): void {
   }
   countMonthSalaries(employees: Employee[], month: number): void {
     this.salariescost = [];
-    const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, month));
+    //const employeesInMonth = employees.filter((one)=> this.FilterEmployees(one, month));
+    const employeesInMonth = this.filterEmps(employees, month);
     this.departments.forEach((department)=> {
      const cost = employeesInMonth.filter((one)=> one.department.includes(department))
         .map(one => one.salaries)

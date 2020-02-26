@@ -91,10 +91,6 @@ export class NewEmployeeComponent implements OnInit, OnDestroy {
       })
     }
   }
-
-
-
-
   closeIt(): void {
     this.form.reset();
     this.router.navigate(['employees']);
@@ -108,41 +104,6 @@ export class NewEmployeeComponent implements OnInit, OnDestroy {
   mainImgChange(file: any): void {
     console.log(file.target.files[0]);
   }
-   daysInMonth (month, year) {
-    return new Date(year, month, 0).getDate();
-  }
-  checkdates(): void {
-    console.log(new Date().getDay());
-    const date = new Date(2020, 2, 1);
-    console.log(this.daysInMonth(1, 2020));
 
-
-    const startmonth = date.getMonth();
-    const startyear = date.getUTCFullYear();
-    const startday = date.getDate();
-
-    const lastday = new Date(startyear, startmonth + 4, startday);
-
-    for (let month = date; month < lastday; month.setMonth(month.getMonth() + 1)) {
-      const startofmonth = month;
-      const daysinMonth = this.daysInMonth(month.getMonth(), month.getFullYear());
-      for(let day = 1; day <= daysinMonth; day++) {
-        const dynamicdate = new Date(month.getFullYear(), month.getMonth(), day);
-        let whatstring = 'w';
-        if (dynamicdate.getDay() === 6 || dynamicdate.getDay() === 0) {
-         whatstring = '';
-        }
-        this.myarray.push({
-          day: day,
-          month: month.getMonth(),
-          what: whatstring,
-          year: month.getFullYear()
-        });
-      }
-      console.log(this.myarray);
-    }
-
-
-  }
 
 }

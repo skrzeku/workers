@@ -83,6 +83,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   dataSource: Employee[];
   subscription: any;
   absencesselect = 'U';
+  math = Math;
 
 
   //charts
@@ -199,8 +200,6 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
       const count = montharray.reduce((a, b) => a + b,0);
       this.editSummary(one.key, one.month, count);
     });
-
-
   }
   dosometning(e: any): void {
     console.log(e);

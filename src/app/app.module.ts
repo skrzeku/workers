@@ -12,8 +12,9 @@ import {environment} from "../environments/environment";
 import {MaterialModule} from "./material/material.module";
 import {MainService} from "./core-module/services/main.service";
 import {AngularFireDatabaseModule} from '@angular/fire/database'
-import {MatFileUploadModule} from "angular-material-fileupload";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {LoginModule} from "./login/login.module";
+import {AngularFireAuthModule} from "@angular/fire/auth";
 
 
 
@@ -32,7 +33,9 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
     AngularFireModule.initializeApp(environment.firebase),
     MaterialModule,
     AngularFireDatabaseModule,
-    NgxChartsModule
+    NgxChartsModule,
+    LoginModule,
+    AngularFireAuthModule
 
   ],
   providers: [MainService],

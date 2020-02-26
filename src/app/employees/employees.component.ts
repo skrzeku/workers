@@ -14,7 +14,7 @@ import {BottomComponent} from "../core-module/bottom/bottom.component";
 
 @Component({
   selector: 'app-employees',
-  templateUrl: './employees.component.html',
+  templateUrl: "./employees.component.html",
   styleUrls: ['./employees.component.less']
 })
 
